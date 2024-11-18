@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<!-- <web-view src="{{web_src}}"> </web-view> -->
+ <view class="img-wrap">
+  <image class="img" mode="aspectFill" src="../../assets/logo.png"></image>
+</view>
+<view class="tit">小果图册</view>
+<button wx:if="{{checked}}" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">一键登录</button>
+<button wx:else type="primary" bindtap="showTips">一键登录</button>
+
+<view class="protocol-wrap">
+  <checkbox-group bindchange="radioChange">
+    <checkbox checked="{{checked}}"/>
+  </checkbox-group>
+  <view class="txt">我已阅读并同意</view>
+  <view class="user-proto" bindtap="toProtocol">《用户协议》</view>
+</view>

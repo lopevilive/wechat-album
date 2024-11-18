@@ -1,0 +1,17 @@
+/**index.wxss**/
+
+.img-wrap {
+  width: 100vw;
+  height: 600rpx;
+  display: flex;
+  align-items: center;
+}
+.img-wrap .img {
+  width: 100%;
+}
+
+.text {
+  font-size: 24rpx;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,36 @@
+/**index.wxss**/
+.img-wrap {
+  width: 100%;
+  height: 250rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150rpx;
+}
+.img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+.tit {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+.protocol-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  margin-top: 40rpx;
+}
+.protocol-wrap .txt {
+  color: #6e7071;
+}
+
+.protocol-wrap .user-proto {
+  color: #669cd1;
+}

@@ -1,0 +1,25 @@
+/**index.wxss**/
+
+.img-wrap {
+  width: 100%;
+  height: 250rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150rpx;
+}
+.img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+.text {
+  font-size: 34rpx;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+}
+.nick-name {
+  font-weight: bold;
+}

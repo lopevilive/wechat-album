@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<!-- <web-view src="{{web_src}}"> </web-view> -->
+<view class="img-wrap">
+  <image class="img" mode="aspectFit" src="{{qrcodeUrl}}" show-menu-by-longpress="{{true}}"></image>
+</view>
+<view class="text">{{message}}</view>
+
+
+  <!-- <view>login</view> -->
