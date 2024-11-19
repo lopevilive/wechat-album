@@ -8,6 +8,7 @@ Page({
   async onLoad(options) {
     let {src_path} = options
     if (src_path) src_path = decodeURIComponent(src_path)
+    if (!src_path) src_path = '/'
     if (src_path) {
       this.init(src_path)
     }

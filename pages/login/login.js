@@ -19,7 +19,9 @@ Page({
       } else {
         wx.reLaunch({url: '../index/index'})
       }
-    } catch(e) {}finally{
+    } catch(e) {
+      
+    }finally{
       wx.hideLoading()
     }
   }
