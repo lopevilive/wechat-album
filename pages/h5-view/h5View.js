@@ -22,10 +22,16 @@ Page({
       src_path = `/product-manage/${RegExp.$1}?toDetial=${RegExp.$2}`
     }
 
-    return {
-      title: `${queryObj?.title || ' '}`,
+    const {title, imageUrl} = queryObj
+
+    let ret = {
+      title: `${title || ' '}`,
       path: `/pages/index/index?src_path=${encodeURIComponent(src_path)}`
     }
+    if (imageUrl) {
+      ret.imageUrl = `https:${imageUrl}`
+    }
+    return ret
   }
 })
 
