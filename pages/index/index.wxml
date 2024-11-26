@@ -4,7 +4,7 @@
   <view class="img-wrap">
     <image class="img" mode="aspectFit" src="../../assets/Image upload-rafiki.png"></image>
   </view>
-  <view class="text">欢迎使用数字化产品图册，帮助您轻松管理和分享产品。</view>
+  <view class="text">免费使用！手机即可轻松制作产品图册，适用于所有企业和销售人员。支持高清图，助您高效展示产品。</view>
   <view class="btn">
     <button type="primary" bindtap="handleClick">开始使用</button>
   </view>

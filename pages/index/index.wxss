@@ -1,7 +1,7 @@
 /**index.wxss**/
 .img-wrap {
   width: 100vw;
-  height: 600rpx;
+  height: 500rpx;
   display: flex;
   align-items: center;
 }
@@ -12,6 +12,7 @@
   font-size: 24rpx;
   display: flex;
   justify-content: center;
+  padding: 0 40rpx
 }
 .btn {
   margin-top: 28rpx;

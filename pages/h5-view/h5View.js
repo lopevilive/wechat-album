@@ -23,7 +23,7 @@ Page({
     }
 
     return {
-      title: `${queryObj?.title || '小果图册'}`,
+      title: `${queryObj?.title || ' '}`,
       path: `/pages/index/index?src_path=${encodeURIComponent(src_path)}`
     }
   }

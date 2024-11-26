@@ -1,0 +1,20 @@
+/**index.wxss**/
+.title {
+  margin: 100rpx 40rpx 36rpx 40rpx;
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 28rpx;
+}
+.img-wrap {
+  height: 600rpx;
+  width: 600rpx;
+  margin: 0 auto;
+  margin-bottom: 40rpx;
+}
+.img-wrap .img {
+  width: 100%;
+  height: 100%;
+}
