@@ -37,10 +37,13 @@ const getLoginCode = async () => {
 }
 
 const getToken = async () => {
+  const {globalData: {apiPath}} = getApp();
+  try {
+    await http.post(`${apiPath}/album/ActiveSys`) // 先激活系统
+  } catch(e) {}
   let token = wx.getStorageSync('token')
   if (token) return token
   const code = await getLoginCode()
-  const {globalData: {apiPath}} = getApp();
   const {data} = await http.post(`${apiPath}/user/Login`, {code})
   if (data.code === 0) {
     token = data.data
