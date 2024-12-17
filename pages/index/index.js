@@ -9,19 +9,14 @@ Page({
     let {src_path} = options
     if (src_path) src_path = decodeURIComponent(src_path)
     if (!src_path) src_path = '/'
-    if (src_path) {
-      this.init(src_path)
-    }
+    this.init(src_path)
   },
   toH5 (token, src_path) {
+    if (!src_path) src_path = '/'
+    const urlInstance = new util.UrlTools(src_path)
+    urlInstance.addQuery({token})
     const {globalData: {web_src}} = getApp();
-    if (!src_path) src_path = '/' // 默认跳 h5 首页
-    let url = `${web_src}${src_path}`
-    if (/\?/.test(url)) {
-      url = `${url}&token=${token}`
-    } else {
-      url = `${url}?token=${token}`
-    }
+    let url = `${web_src}${urlInstance.getFullpath()}`
     const viewPath = `../h5-view/h5View?web_src=${encodeURIComponent(url)}`
     wx.navigateTo({url: viewPath})
   },
@@ -39,6 +34,12 @@ Page({
       wx.hideLoading()
     }
   },
+  onShareAppMessage (){
+    return {
+      title: '小果图册',
+      path: '/pages/index/index'
+    }
+  }
 })
 
 wx.showShareMenu({

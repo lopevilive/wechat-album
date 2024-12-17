@@ -11,16 +11,19 @@ Page({
       if (src_path) src_path = decodeURIComponent(src_path)
       const {globalData: {web_src}} = getApp();
       const token = await util.getToken()
-
       if (src_path) {
-        const src = `${web_src}${src_path}?token=${token}`
+        const instance = new util.UrlTools(src_path)
+        instance.addQuery({token})
+        src_path = instance.getFullpath()
+        const src = `${web_src}${src_path}`
         const url = `../h5-view/h5View?web_src=${encodeURIComponent(src)}`
-        wx.redirectTo({url})
+        await wx.redirectTo({url})
       } else {
-        wx.reLaunch({url: '../index/index'})
+        await wx.reLaunch({url: '../index/index'})
       }
     } catch(e) {
-      
+      console.error(e)
+      await wx.reLaunch({url: '../index/index'})
     }finally{
       wx.hideLoading()
     }

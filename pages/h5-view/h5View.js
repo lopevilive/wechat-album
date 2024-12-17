@@ -14,15 +14,14 @@ Page({
   },
   onShareAppMessage(options) {
     const {webViewUrl} = options
-    const uri = utils.parseUrl(webViewUrl)
-    const {pathname, queryObj} = uri
-    let src_path = pathname.replace('/dist', '')
-
+    let rawInstance = new utils.UrlTools(webViewUrl)
+    const {title, imageUrl} = rawInstance.getQuery()
+    let src_path = rawInstance.getFullpath()
     if(/\/product-manage\/(\d+)\/product-detial\/(\d+)/.test(src_path)) {
-      src_path = `/product-manage/${RegExp.$1}?toDetial=${RegExp.$2}`
+      let newInstance = new utils.UrlTools(`/product-manage/${RegExp.$1}?toDetial=${RegExp.$2}`)
+      newInstance.addQuery(rawInstance.getQuery())
+      src_path = newInstance.getFullpath()
     }
-
-    const {title, imageUrl} = queryObj
 
     let ret = {
       title: `${title || ' '}`,

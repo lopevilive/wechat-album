@@ -31,13 +31,6 @@ Page({
     const {src_path} = this.data
     if (src_path) {
       wx.reLaunch({url: `../index/index?src_path=${encodeURIComponent(src_path)}`})
-      // const {globalData: {web_src}} = getApp();
-      // const token = await util.getToken()
-      // const src = `${web_src}${src_path}?token=${token}`
-      // wx.navigateBack()
-      // setTimeout(() => {
-      //   wx.redirectTo({url: `../h5-view/h5View?web_src=${encodeURIComponent(src)}`})
-      // }, 50);
     } else {
       wx.reLaunch({url: `../index/index?src_path=${encodeURIComponent('/')}`})
     }

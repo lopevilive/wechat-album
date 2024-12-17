@@ -38,11 +38,21 @@ const getLoginCode = async () => {
 
 const getToken = async () => {
   const {globalData: {apiPath}} = getApp();
-  try {
-    await http.post(`${apiPath}/album/ActiveSys`) // 先激活系统
-  } catch(e) {}
+  let needLogin = false
   let token = wx.getStorageSync('token')
-  if (token) return token
+  try {
+    if (token) {
+      const {data} = await http.post(`${apiPath}/user/VeriToken`, {token}) // 先交验 token
+      if (data.code !== 0) needLogin = true
+    } else {
+      needLogin = true
+    }
+  } catch(e) {
+    needLogin = true
+    console.error(e)
+  }
+
+  if (!needLogin) return token
   const code = await getLoginCode()
   const {data} = await http.post(`${apiPath}/user/Login`, {code})
   if (data.code === 0) {
@@ -52,22 +62,57 @@ const getToken = async () => {
   return token
 }
 
+class UrlTools {
+  constructor(url) {
+    this.rawObj = URLParse(url)
+    this.pathname= this.rawObj.pathname.replace('/dist', '')
+    this.query = {}
+    this.init()
+  }
+  getFullpath () {
+    let ret = this.pathname
+    let queryKeys = Object.keys(this.query)
+    let query = ''
+    if (queryKeys.length) {
+      for (const key of queryKeys) {
+        const val = this.query[key]
+        if (!val) continue
+        if (!query) {
+          query += `?${key}=${encodeURIComponent(val)}`
+        } else {
+          query += `&${key}=${encodeURIComponent(val)}`
+        }
+      }
+    }
+    ret = `${ret}${query}`
+    return ret
+  }
 
+  getQuery() {
+    return {...this.query}
+  }
 
-const parseUrl = (url) => {
-  const uri = URLParse(url)
-  let {query} = uri
-  let queryObj = {}
-  if (query) {
-    query = query.split('?')[1]
-    query = query.split('&')
-    for (const item of query) {
-      let [key, val] = item.split('=')
-      queryObj[key] = decodeURIComponent(val)
+  addQuery(obj) {
+    this.query = Object.assign(this.query, obj)
+  }
+
+  removeQuery(key) {
+    this.query[key] = undefined
+  }
+
+  init() {
+    let {query} = this.rawObj
+    query = query?.split('?')?.[1]
+    if (query) {
+      query = query.split('&')
+      for (const item of query) {
+        let [key, val] = item.split('=')
+        key = decodeURIComponent(key)
+        val = decodeURIComponent(val)
+        this.query[key] = val
+      }
     }
   }
-  uri.queryObj = queryObj
-  return uri
 }
 
 
@@ -76,5 +121,5 @@ module.exports = {
   formatTime,
   getLoginCode,
   getToken,
-  parseUrl
+  UrlTools
 }

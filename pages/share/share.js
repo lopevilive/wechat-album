@@ -1,3 +1,5 @@
+const util = require('../../utils/util')
+
 
 Page({
   data: {
@@ -12,7 +14,9 @@ Page({
   },
   onShareAppMessage() {
     const {shopId, productId, title,url} = this.data.info
-    const src_path = `/product-manage/${shopId}?toDetial=${productId}`
+    const instance = new util.UrlTools(`/product-manage/${shopId}`)
+    instance.addQuery({toDetial: productId, title, imageUrl: url})
+    const src_path = instance.getFullpath()
     return {
       title: title || '  ',
       path: `/pages/index/index?src_path=${encodeURIComponent(src_path)}`,
