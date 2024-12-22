@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "share-page",
+          "pathName": "pages/share-page/share-page",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "viewQrCode",
           "pathName": "pages/viewQrCode/viewQrCode",
           "query": "",

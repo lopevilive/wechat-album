@@ -1,0 +1,18 @@
+/**index.wxss**/
+.canvas-content {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.8);
+  display: flex;
+  justify-content: center;
+}
+
+.canvas-content .img-wrap {
+
+}
+
+.canvas-content .img {
+  border-radius: 10rpx;
+  width: 600rpx;
+  margin-top: 50rpx;
+}

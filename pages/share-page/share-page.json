@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小果图册",
+  "usingComponents":{
+    "painter":"/components/painter/painter"
+  }
+}

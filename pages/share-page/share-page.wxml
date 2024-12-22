@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<!-- <web-view src="{{web_src}}"> </web-view> -->
+<painter
+  widthPixels="1000"
+  bind:imgOK="onImgOK"
+  palette="{{paintPallette}}"
+/>
+<view class="canvas-content">
+  <view class="img-wrap">
+    <image class="img" src="{{image}}" mode="widthFix"/>
+  </view>
+</view>
+
+
+  <!-- <view>login</view> -->
