@@ -73,6 +73,19 @@ Page({
   saveImage() {
     wx.saveImageToPhotosAlbum({
       filePath: this.data.image,
+      success: () => {
+        wx.showToast({
+          title: '保存成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail: () => {
+        wx.showToast({
+          title: '保存失败，请允许添加到相册',
+          duration: 2000
+        })
+      }
     });
   },
   onShareAppMessage(){

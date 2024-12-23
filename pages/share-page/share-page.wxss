@@ -22,7 +22,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 250rpx;
+  height: 300rpx;
   border-radius: 20rpx 20rpx 0 0;
   background: #ededed;
   display: flex;
