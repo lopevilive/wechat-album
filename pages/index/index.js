@@ -11,6 +11,8 @@ Page({
     if (!src_path) src_path = '/'
     if (scene) {
       src_path = `/view-share?scene=${scene}`
+      // console.log(src_path)
+      // return
     }
     this.init(src_path)
   },
