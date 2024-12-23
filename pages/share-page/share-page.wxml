@@ -9,7 +9,18 @@
   <view class="img-wrap">
     <image class="img" src="{{image}}" mode="widthFix"/>
   </view>
+  <view class="share-footer">
+    <button class="btn-item" size="mini" open-type="share">
+      <view class="img-wrap"> <image class="img-icon" src="/assets/share.png"/> </view>
+      <view class="btn-text">转发给朋友</view>
+    </button>
+    <button class="btn-item" size="mini" bind:tap="saveImage">
+      <view class="img-wrap"> <image class="img-icon" src="/assets/download.png"/> </view>
+      <view class="btn-text">保存到相册</view>
+    </button>
+  </view>
 </view>
+
 
 
   <!-- <view>login</view> -->

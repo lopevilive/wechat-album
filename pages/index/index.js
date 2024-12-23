@@ -6,9 +6,12 @@ Page({
 
   },
   async onLoad(options) {
-    let {src_path} = options
+    let {src_path, scene} = options
     if (src_path) src_path = decodeURIComponent(src_path)
     if (!src_path) src_path = '/'
+    if (scene) {
+      src_path = `/view-share?scene=${scene}`
+    }
     this.init(src_path)
   },
   toH5 (token, src_path) {

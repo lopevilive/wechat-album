@@ -12,7 +12,6 @@ Page({
   },
   async onLoad({payload}) {
     if (!payload) return
-    // console.log(JSON.parse(decodeURIComponent(payload)))
     const info = JSON.parse(decodeURIComponent(payload))
     this.setData({info})
   },

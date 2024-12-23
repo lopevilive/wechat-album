@@ -48,7 +48,7 @@ Page({
           this.goNext()
         }
       } else {
-        console.log('用户拒绝授权');
+        console.error('用户拒绝授权');
       }
     } catch(e) {} finally{
       wx.hideLoading()

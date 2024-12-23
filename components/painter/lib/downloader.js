@@ -44,7 +44,7 @@ export default class Dowloader {
       const fileName = getFileName(url);
       if (!lru) {
         // 无 lru 情况下直接判断 临时文件是否存在，不存在重新下载
-        wx.getFileInfo({
+        wx.getFileSystemManager().getFileInfo({
           filePath: fileName,
           success: () => {
             resolve(url);
@@ -72,7 +72,7 @@ export default class Dowloader {
 
       if (file) {
         if (file[KEY_PATH].indexOf('//usr/') !== -1) {
-          wx.getFileInfo({
+          wx.getFileSystemManager().getFileInfo({
             filePath: file[KEY_PATH],
             success() {
               resolve(file[KEY_PATH]);
@@ -148,7 +148,7 @@ function transformBase64File(base64data, lru) {
       data: buffer,
       encoding: 'binary',
       success() {
-        wx.getFileInfo({
+        wx.getFileSystemManager().getFileInfo({
           filePath: path,
           success: (tmpRes) => {
             const newFileSize = tmpRes.size;
@@ -189,7 +189,7 @@ function downloadFile(url, lru) {
         const {
           tempFilePath
         } = res;
-        wx.getFileInfo({
+        wx.getFileSystemManager().getFileInfo({
           filePath: tempFilePath,
           success: (tmpRes) => {
             const newFileSize = tmpRes.size;

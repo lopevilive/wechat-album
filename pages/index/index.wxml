@@ -1,38 +1,7 @@
-<!--index.wxml-->
-<!-- <web-view src="{{web_src}}"> </web-view> -->
- <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">登录</button> -->
-  <view class="img-wrap">
-    <image class="img" mode="aspectFit" src="../../assets/Image upload-rafiki.png"></image>
-  </view>
-  <view class="text">手机即可制作高清产品图册、产品手册；支持一键生成报价单、采购清单；适用于所有企业和销售人员，助您高效展示产品，提升工作效率。</view>
-  <view class="btn">
-    <button type="primary" bindtap="handleClick">开始使用</button>
-  </view>
- 
-
-<!-- <scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-  </view>
-</scroll-view> -->
+<view class="img-wrap">
+  <image class="img" mode="aspectFit" src="../../assets/Image upload-rafiki.png"></image>
+</view>
+<view class="text">手机即可制作高清产品图册、产品手册；支持一键生成报价单、采购清单；适用于所有企业和销售人员，助您高效展示产品，提升工作效率。</view>
+<view class="btn">
+  <button type="primary" bindtap="handleClick">开始使用</button>
+</view>

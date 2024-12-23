@@ -10,7 +10,7 @@
         {
           "name": "share-page",
           "pathName": "pages/share-page/share-page",
-          "query": "",
+          "query": "src_path=%2Fproduct-manage%2F12%2Fview-inventory%2F8%3Ftitle%3D%25E6%258A%25A5%25E4%25BB%25B7%25E6%25B8%2585%25E5%258D%2595&url=%2F%2Fupload-1259129443.cos.ap-guangzhou.myqcloud.com%2Fnone_b29c73799ce8fc030d507a598587624b.png%3FimageMogr2%2Fquality%2F40&title=%E8%A1%A3%E6%9F%9C%E5%AE%9A%E5%88%B6&desc1=%5B%22%E6%8A%A5%E4%BB%B7%E6%B8%85%E5%8D%95%22%5D&desc2=%5B%222024%2F12%2F23%2015%3A40%22%5D&scene=a%3D1%26b%3D12%26c%3D8",
           "launchMode": "default",
           "scene": null
         },
