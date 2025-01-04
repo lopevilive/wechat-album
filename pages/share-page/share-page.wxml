@@ -14,6 +14,10 @@
       <view class="img-wrap"> <image class="img-icon" src="/assets/share.png"/> </view>
       <view class="btn-text">转发给朋友</view>
     </button>
+    <button class="btn-item" size="mini" wx:if="{{!!inventoryId}}" bind:tap="downloadExcel">
+      <view class="img-wrap"> <image class="img-icon" src="/assets/excel.png"/> </view>
+      <view class="btn-text">导出 Excel</view>
+    </button>
     <button class="btn-item" size="mini" bind:tap="saveImage">
       <view class="img-wrap"> <image class="img-icon" src="/assets/download.png"/> </view>
       <view class="btn-text">保存到相册</view>

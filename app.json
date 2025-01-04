@@ -6,7 +6,6 @@
     "pages/phone/phone",
     "pages/invite/invite",
     "pages/viewQrCode/viewQrCode",
-    "pages/share/share",
     "pages/share-page/share-page"
   ],
   "window": {

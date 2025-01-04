@@ -8,9 +8,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "share-page",
+          "name": "pages/share-page/share-page",
           "pathName": "pages/share-page/share-page",
-          "query": "src_path=%2Fproduct-manage%2F12%2Fview-inventory%2F8%3Ftitle%3D%25E6%258A%25A5%25E4%25BB%25B7%25E6%25B8%2585%25E5%258D%2595&url=%2F%2Fupload-1259129443.cos.ap-guangzhou.myqcloud.com%2Fnone_b29c73799ce8fc030d507a598587624b.png%3FimageMogr2%2Fquality%2F40&title=%E8%A1%A3%E6%9F%9C%E5%AE%9A%E5%88%B6&desc1=%5B%22%E6%8A%A5%E4%BB%B7%E6%B8%85%E5%8D%95%22%5D&desc2=%5B%222024%2F12%2F23%2015%3A40%22%5D&scene=a%3D1%26b%3D12%26c%3D8",
+          "query": "src_path=%252Fproduct-manage%252F12%252Fview-inventory%252F21%253Ftitle%253D%2525E6%25258A%2525A5%2525E4%2525BB%2525B7%2525E6%2525B8%252585%2525E5%25258D%252595&url=%252F%252Fupload-1259129443.cos.ap-guangzhou.myqcloud.com%252Fnone_b29c73799ce8fc030d507a598587624b.png%253FimageMogr2%252Fquality%252F40&title=%25E6%258A%25A5%25E4%25BB%25B7%25E6%25B8%2585%25E5%258D%2595&desc1=%255B%2522%25E8%25A1%25A3%25E6%259F%259C%25E5%25AE%259A%25E5%2588%25B6%2522%255D&desc2=%255B%25222025%252F01%252F05%252000%253A26%2522%255D&scene=a%253D1%2526b%253D12%2526c%253D21&inventoryId=21",
           "launchMode": "default",
           "scene": null
         },
