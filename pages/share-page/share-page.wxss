@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 40rpx;
-  background-color: #ededed;
+  background-color: #ededed !important;
 }
 
 .share-footer .btn-item .img-wrap {

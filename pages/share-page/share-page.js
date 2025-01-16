@@ -54,7 +54,7 @@ Page({
   },
   async getQrCode() {
     try {
-      wx.showLoading({mask: true, title: '正在生成海报~'})
+      wx.showLoading({ title: '正在生成海报~'})
       const {globalData: {apiPath}} = getApp();
       const {scene} = this.data
       const {data} = await http.post(`${apiPath}/album/Getwxacodeunlimit`, {scene: decodeURIComponent(scene)})

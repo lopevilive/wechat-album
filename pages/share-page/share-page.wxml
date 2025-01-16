@@ -18,7 +18,7 @@
       <view class="img-wrap"> <image class="img-icon" src="/assets/excel.png"/> </view>
       <view class="btn-text">导出 Excel</view>
     </button>
-    <button class="btn-item" size="mini" bind:tap="saveImage">
+    <button class="btn-item" size="mini" bind:tap="saveImage" disabled="{{!image}}">
       <view class="img-wrap"> <image class="img-icon" src="/assets/download.png"/> </view>
       <view class="btn-text">保存到相册</view>
     </button>
