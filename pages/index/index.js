@@ -20,6 +20,10 @@ Page({
     if (!src_path) src_path = '/'
     const urlInstance = new util.UrlTools(src_path)
     urlInstance.addQuery({token})
+    const deviceInfo = wx.getDeviceInfo()
+    if (/(mac|windows)/.test(deviceInfo.platform)) {
+      urlInstance.addQuery({isPC: '1'})
+    }
     const {globalData: {web_src}} = getApp();
     let url = `${web_src}${urlInstance.getFullpath()}`
     const viewPath = `../h5-view/h5View?web_src=${encodeURIComponent(url)}`
