@@ -3,7 +3,7 @@ const util = require('../../utils/util')
 
 Page({
   data: {
-
+    inited: false
   },
   async onLoad(options) {
     let {src_path, scene} = options
@@ -34,13 +34,15 @@ Page({
   },
   async init(src_path) {
     try {
-      wx.showLoading({mask: true})
+      this.setData({inited: false})
       const token = await util.getToken()
       this.toH5(token, src_path)
     } catch(e) {
-
+      console.error(e)
     }finally {
-      wx.hideLoading()
+      setTimeout(() => {
+        this.setData({inited: true})
+      }, 1000);
     }
   },
   onShareAppMessage (){
