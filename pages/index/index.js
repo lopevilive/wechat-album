@@ -3,9 +3,11 @@ const util = require('../../utils/util')
 
 Page({
   data: {
-    inited: false
+    inited: false,
+    src_path: ''
   },
   async onLoad(options) {
+    getApp().globalData.webVeiwName = ''
     let {src_path, scene} = options
     if (src_path) src_path = decodeURIComponent(src_path)
     if (!src_path) src_path = '/'
@@ -14,7 +16,8 @@ Page({
       // console.log(src_path)
       // return
     }
-    this.init(src_path)
+    this.setData({src_path})
+    // this.init(src_path)
   },
   toH5 (token, src_path) {
     if (!src_path) src_path = '/'
@@ -41,8 +44,21 @@ Page({
       console.error(e)
     }finally {
       setTimeout(() => {
-        this.setData({inited: true})
+        // this.setData({inited: true})
       }, 1000);
+    }
+  },
+  onShow(){
+    const {globalData: {webVeiwName}} = getApp()
+    if (webVeiwName === 'home') {
+      this.setData({inited: true})
+      return
+    }
+    this.setData({inited: false})
+    if (!webVeiwName){
+      this.init(this.data.src_path)
+    } else {
+      this.init('/')
     }
   },
   onShareAppMessage (){

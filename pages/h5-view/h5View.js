@@ -12,6 +12,12 @@ Page({
       this.setData({ web_src })
     }
   },
+  onMessageHandle(e) {
+    const data = e.detail?.data || []
+    const info = data.pop()
+    getApp().globalData.webVeiwName = info.name
+  },
+
   onShareAppMessage(options) {
     const {webViewUrl} = options
     let rawInstance = new utils.UrlTools(webViewUrl)

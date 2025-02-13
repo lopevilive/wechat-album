@@ -1,3 +1,3 @@
 <!--index.wxml-->
-<web-view src="{{web_src}}"> </web-view>
+<web-view src="{{web_src}}" bindmessage="onMessageHandle"> </web-view>
 
