@@ -58,7 +58,7 @@ Page({
     if (!webVeiwName){
       this.init(this.data.src_path)
     } else {
-      this.init('/')
+      this.init('/?noRedict=1')
     }
   },
   onShareAppMessage (){
