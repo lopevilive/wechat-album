@@ -53,13 +53,22 @@ const getToken = async () => {
   }
 
   if (!needLogin) return token
-  const code = await getLoginCode()
-  const {data} = await http.post(`${apiPath}/user/Login`, {code})
-  if (data.code === 0) {
-    token = data.data
-    wx.setStorageSync('token', token)
+
+  try {
+    const code = await getLoginCode()
+    const {data} = await http.post(`${apiPath}/user/Login`, {code})
+    if (data.code === 0) {
+      token = data.data
+      wx.setStorageSync('token', token)
+    }
+    return token
+  } catch(e) {
+    wx.showToast({
+      title: e?.errMsg || '请求出错了～',
+      icon: 'none'
+    })
+    throw e
   }
-  return token
 }
 
 class UrlTools {

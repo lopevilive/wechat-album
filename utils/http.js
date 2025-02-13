@@ -8,7 +8,7 @@ const get = async (url) => {
 
 const post = async (url, payload) => {
   return new Promise((resolve, reject) => {
-    wx.request({ url,data: payload, method: 'POST', success: resolve, fail: reject })
+    wx.request({ url,data: payload, method: 'POST',timeout: 10 * 1000, success: resolve, fail: reject })
   })
 }
 
