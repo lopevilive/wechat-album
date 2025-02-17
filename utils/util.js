@@ -48,6 +48,10 @@ const getToken = async () => {
       needLogin = true
     }
   } catch(e) {
+    wx.showToast({
+      title: `${e?.errMsg}*` || '请求出错了～*',
+      icon: 'none'
+    })
     needLogin = true
     console.error(e)
   }
