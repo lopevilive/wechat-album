@@ -13,6 +13,7 @@ Page({
     qrcodeUrl: '',
     scene: '',
     inventoryId: '',
+    noExport: '', // 禁止导出
     info: {
       // src_path: '/product-manage/12', // 路径
       // url: '//upload-1259129443.cos.ap-guangzhou.myqcloud.com/12_3_5a39773610c690a655d26851f6d49086.jpg?imageMogr2/quality/40', // 图片地址
@@ -72,7 +73,7 @@ Page({
     }
   },
   async onLoad(options) {
-    const {src_path, url, title, desc1, desc2, scene, inventoryId} = options
+    const {src_path, url, title, desc1, desc2, scene, inventoryId, noExport} = options
     console.log(options)
     const data = {
       src_path: decodeURIComponent(src_path),
@@ -84,6 +85,7 @@ Page({
     this.setData({info: data})
     this.setData({scene})
     this.setData({inventoryId: decodeURIComponent(inventoryId || '') || ''})
+    this.setData({noExport: decodeURIComponent(noExport || '') || ''})
     await this.getQrCode()
   },
   onImgOK(e) {
@@ -133,11 +135,6 @@ Page({
         console.error(err)
       }
     })
-    // const res = await wx.downloadFile({
-    //   url: `${apiPath}/album/ExportInventory?id=${this.data.inventoryId}`
-    // })
-    // console.log(res)
-    // await wx.shareFileMessage({filePath: res.tempFilePath})
   },
   onShareAppMessage(){
     const {src_path, url} = this.data.info
