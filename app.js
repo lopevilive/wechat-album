@@ -6,7 +6,7 @@ App({
   globalData: {
     userInfo: null,
     webVeiwName: '',
-    apiPath: 'https://xiaoguo.mkeg.cn/api',
-    web_src: 'https://xiaoguo.mkeg.cn/dist'
+    apiPath: 'https://album.xiaoguoyun.top/api',
+    web_src: 'https://album.xiaoguoyun.top/dist'
   }
 })
