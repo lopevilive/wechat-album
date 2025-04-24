@@ -1,4 +1,5 @@
 // app.js
+const url = 'huace.xiaoguoyun.top'
 App({
   onLaunch() {
 
@@ -6,7 +7,7 @@ App({
   globalData: {
     userInfo: null,
     webVeiwName: '',
-    apiPath: 'https://huace.xiaoguoyun.top/api',
-    web_src: 'https://huace.xiaoguoyun.top/dist'
+    apiPath: `https://${url}/api`,
+    web_src: `https://${url}/dist`
   }
 })
