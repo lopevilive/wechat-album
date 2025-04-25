@@ -27,6 +27,9 @@ Page({
     if (/(mac|windows)/.test(deviceInfo.platform)) {
       urlInstance.addQuery({isPC: '1'})
     }
+    const accountInfo = wx.getAccountInfoSync();
+    const env = accountInfo.miniProgram.envVersion;
+    urlInstance.addQuery({wxEnv: env})
     const {globalData: {web_src}} = getApp();
     let url = `${web_src}${urlInstance.getFullpath()}`
     const viewPath = `../h5-view/h5View?web_src=${encodeURIComponent(url)}`

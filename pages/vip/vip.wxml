@@ -1,0 +1,57 @@
+<wxs module="m1">
+  module.exports.getCurrentInfo = function (idx, cfg) {
+    if (cfg && cfg[idx]) {
+      return cfg[idx]
+    }
+    return {}
+  }
+</wxs>
+
+<view class="header-wrap">
+  <image class="img-shop" mode="aspectFill" src="{{shopInfo.url}}"></image>
+  <view class="right-content">
+    <view>{{shopInfo.name || ''}}</view>
+    <view class="desc">{{currVipText}}</view>
+  </view>
+</view>
+<view class="tit-wrap">套餐选择</view>
+<view class="combo-wrap">
+  <view
+    class="item-wrap {{index === selectedIdx? 'active-item' : ''}} {{currLevel > item.level ? 'disabled-item' : ''}}"
+    wx:for="{{cfg}}" wx:key="level"
+    bindtap="itemClickHandle"
+    data-idx="{{index}}"
+  >
+    <view class="item-name">{{item.limit}}容量会员</view>
+    <view class="price-content">
+      <view class="unit">¥</view>
+      <view class="num">{{item.price / 100}}</view>
+      <view class="unit">/年</view>
+    </view>
+  </view>
+</view>
+<view class="tips-wrap">
+  <view>1.不同会员只有容量差异，可补差价升级。</view>
+  <view>2.永远都不会打折，随时买都是最低价～</view>
+</view>
+<view class="tit-wrap">会员权益</view>
+<view class="rights-wrap">
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/rongliang.png"></image></view>
+    <view class="item-name">图片容量</view>
+    <view class="item-desc">可上传{{m1.getCurrentInfo(selectedIdx, cfg).limit}}个产品</view>
+  </view>
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
+    <view class="item-name">图片权限</view>
+    <view class="item-desc">每个产品可上传12张图片</view>
+  </view>
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/shuiyin.png"></image></view>
+    <view class="item-name">图片水印</view>
+    <view class="item-desc">支持自动添加水印</view>
+  </view>
+</view>
+<view class="btn-wrap">
+  <button class="btn" type="primary" bindtap="confirmSub">{{displayText}}</button>
+</view>

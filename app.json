@@ -6,7 +6,8 @@
     "pages/phone/phone",
     "pages/invite/invite",
     "pages/viewQrCode/viewQrCode",
-    "pages/share-page/share-page"
+    "pages/share-page/share-page",
+    "pages/vip/vip"
   ],
   "window": {
     "navigationBarTextStyle": "black",
