@@ -33,6 +33,7 @@
 <view class="tips-wrap">
   <view>1.不同会员只有容量差异，可补差价升级。</view>
   <view>2.永远都不会打折，随时买都是最低价～</view>
+  <view>3.开票或其他问题请<view class="tips-contact" bindtap="toContactSys">联系客服</view>。</view>
 </view>
 <view class="tit-wrap">会员权益</view>
 <view class="rights-wrap">
@@ -42,14 +43,19 @@
     <view class="item-desc">可上传{{m1.getCurrentInfo(selectedIdx, cfg).limit}}个产品</view>
   </view>
   <view class="item">
-    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
-    <view class="item-name">图片权限</view>
-    <view class="item-desc">每个产品可上传12张图片</view>
-  </view>
-  <view class="item">
     <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/shuiyin.png"></image></view>
     <view class="item-name">图片水印</view>
     <view class="item-desc">支持自动添加水印</view>
+  </view>
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/gaoqing.png"></image></view>
+    <view class="item-name">高清图</view>
+    <view class="item-desc">支持高清图，让客户看到更多细节</view>
+  </view>
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
+    <view class="item-name">图片权限</view>
+    <view class="item-desc">每个产品可上传12张图片</view>
   </view>
 </view>
 <view class="btn-wrap">

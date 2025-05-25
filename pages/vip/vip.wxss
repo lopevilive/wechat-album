@@ -26,6 +26,10 @@
   font-size: 20rpx;
   color: #bebcbb;
 }
+.tips-wrap .tips-contact {
+  display: inline;
+  color: #4296d5;
+}
 
 .combo-wrap {
   width: 100%;
@@ -82,12 +86,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 33.3%;
+  /* width: 33.3%; */
+  width: 50%;
+  margin-bottom: 20rpx;
 }
 .rights-wrap .item .icon {
   width: 70rpx;
   height: 70rpx;
-  /* border-radius: 50%; */
   overflow: hidden;
   margin-bottom: 5rpx;
 }
@@ -102,6 +107,9 @@
 .rights-wrap .item .item-desc {
   font-size: 22rpx;
   color: #6e7071;
+  text-align: center;
+  width: 80%;
+  height: 32rpx;
 }
 
 .btn-wrap {

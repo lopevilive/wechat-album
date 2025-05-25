@@ -149,6 +149,14 @@ Page({
         this.setData({currVipText: `${item.limit} 容量会员 ${util.formatDate(expiredTime)} 过期`})
       }
     }
+  },
+  toContactSys() {
+    const payload = {
+      qrcodeUrl: '//upload-1259129443.cos.ap-guangzhou.myqcloud.com/5_3_dda7b2170dac6b8a161f072b4b6a62b9.jpg',
+      message: `长按识别二维码～`
+    }
+    let payloadStr = encodeURIComponent(JSON.stringify(payload))
+    wx.navigateTo({url: `../viewQrCode/viewQrCode?payload=${payloadStr}`})
   }
 
 })

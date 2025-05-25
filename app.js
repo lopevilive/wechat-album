@@ -1,5 +1,6 @@
 // app.js
-const url = 'huace.xiaoguoyun.top'
+// const url = 'huace.xiaoguoyun.top'
+const url = 'huace.xiaoguoxx.cn'
 App({
   onLaunch() {
 
