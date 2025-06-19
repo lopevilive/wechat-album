@@ -3,7 +3,7 @@
  <view class="img-wrap">
   <image class="img" mode="aspectFill" src="../../assets/logo.png"></image>
 </view>
-<view class="tit">小果画册</view>
+<view class="tit">小果图册</view>
 <button wx:if="{{checked}}" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">一键登录</button>
 <button wx:else type="primary" bindtap="showTips">一键登录</button>
 

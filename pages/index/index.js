@@ -66,7 +66,7 @@ Page({
   },
   onShareAppMessage (){
     return {
-      title: '小果画册',
+      title: '小果图册',
       path: '/pages/index/index'
     }
   }
