@@ -12,8 +12,8 @@ Page({
     if (src_path) src_path = decodeURIComponent(src_path)
     if (!src_path) src_path = '/'
     if (scene) {
-      src_path = `/view-share?scene=${encodeURIComponent(scene)}`
-      // console.log(src_path)
+      src_path = `/view-share?scene=${scene}`
+      // console.log(src_path, 'src')
       // return
     }
     this.setData({src_path})
