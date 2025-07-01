@@ -86,9 +86,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* width: 33.3%; */
-  width: 50%;
-  margin-bottom: 20rpx;
+  width: 33.3%;
+  /* width: 50%; */
+  margin-bottom: 40rpx;
 }
 .rights-wrap .item .icon {
   width: 70rpx;
@@ -118,4 +118,10 @@
 
 .btn-wrap .btn {
   width: 80%;
+}
+
+.count-style {
+  display: inline;
+  color: #2f79ce;
+  font-weight: bold;
 }

@@ -113,6 +113,10 @@ class UrlTools {
     this.query[key] = undefined
   }
 
+  getPathName() {
+    return this.pathname
+  }
+
   init() {
     let {query} = this.rawObj
     query = query?.split('?')?.[1]

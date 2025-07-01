@@ -20,9 +20,9 @@ Page({
       // title: '有礼喜坊', // 标题
       // desc1: ['乔迁之喜礼盒'],
       // desc2: ['2024/12/18 23:59']
-
     },
-    paintPallette: {}
+    paintPallette: {},
+    forwardPermi: 0,
   },
   createPoster() {
     let paintObj = { width: '700rpx', height: '1000rpx', background: '#f3b24b', views: [] }
@@ -73,7 +73,7 @@ Page({
     }
   },
   async onLoad(options) {
-    const {src_path, url, title, desc1, desc2, scene, inventoryId, noExport} = options
+    const {src_path, url, title, desc1, desc2, scene, inventoryId, noExport, forwardPermi} = options
     console.log(options)
     const data = {
       src_path: decodeURIComponent(src_path),
@@ -86,6 +86,7 @@ Page({
     this.setData({scene})
     this.setData({inventoryId: decodeURIComponent(inventoryId || '') || ''})
     this.setData({noExport: decodeURIComponent(noExport || '') || ''})
+    this.setData({forwardPermi: forwardPermi === '1' ? 1: 0});
     await this.getQrCode()
   },
   onImgOK(e) {
@@ -147,6 +148,13 @@ Page({
     }
     if (url) {
       ret.imageUrl = `http:${url}`
+    }
+    if (this.data.forwardPermi === 1) {
+      wx.updateShareMenu({
+        isPrivateMessage: true,
+        success: () => {},
+        fail: () => {}
+      })
     }
     return ret
   }

@@ -1,7 +1,7 @@
 // app.js
-// const url = 'huace.xiaoguoyun.top'
+const url = 'huace.xiaoguoyun.top'
 // const url = 'huace.xiaoguoxx.cn'
-const url = 'album.xiaoguoxx.cn'
+// const url = 'album.xiaoguoxx.cn'
 App({
   onLaunch() {
 

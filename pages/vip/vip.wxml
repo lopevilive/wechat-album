@@ -31,7 +31,7 @@
   </view>
 </view>
 <view class="tips-wrap">
-  <view>1.不同会员只有容量差异，可补差价升级。</view>
+  <view>1.可补差价升级。</view>
   <view>2.永远都不会打折，随时买都是最低价～</view>
   <view>3.开票或其他问题请<view class="tips-contact" bindtap="toContactSys">联系客服</view>。</view>
 </view>
@@ -39,8 +39,8 @@
 <view class="rights-wrap">
   <view class="item">
     <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/rongliang.png"></image></view>
-    <view class="item-name">图片容量</view>
-    <view class="item-desc">可上传{{m1.getCurrentInfo(selectedIdx, cfg).limit}}个产品</view>
+    <view class="item-name">产品容量</view>
+    <view class="item-desc">可上传 <view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).limit}}</view> 个产品</view>
   </view>
   <view class="item">
     <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/shuiyin.png"></image></view>
@@ -48,15 +48,26 @@
     <view class="item-desc">支持自动添加水印</view>
   </view>
   <view class="item">
-    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/gaoqing.png"></image></view>
-    <view class="item-name">高清图</view>
-    <view class="item-desc">支持高清图，让客户看到更多细节</view>
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/yinsi.png"></image></view>
+    <view class="item-name">转发保护</view>
+    <view class="item-desc">仅管理员可转发 (可选)</view>
+  </view>
+   <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
+    <view class="item-name">图片数量</view>
+    <view class="item-desc">每个产品可上传<view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).imgC}}</view>张图片</view>
+  </view>
+   <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/size.png"></image></view>
+    <view class="item-name">图片大小</view>
+    <view class="item-desc">支持 <view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).imgS}}</view> M 大图上传</view>
   </view>
   <view class="item">
-    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
-    <view class="item-name">图片权限</view>
-    <view class="item-desc">每个产品可上传12张图片</view>
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/gaoqing.png"></image></view>
+    <view class="item-name">高清图</view>
+    <view class="item-desc">图片更清晰，让客户看到更多细节</view>
   </view>
+ 
 </view>
 <view class="btn-wrap">
   <button class="btn" type="primary" bindtap="confirmSub">{{displayText}}</button>
