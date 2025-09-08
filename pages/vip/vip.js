@@ -14,25 +14,43 @@ Page({
     money: 0
   },
   async onLoad(options) {
-    const payload = JSON.parse(decodeURIComponent(options.payload))
     const shopInfo = JSON.parse(decodeURIComponent(options.shopInfo))
     const cfg = []
     let idx = 0;
-    for (const item of payload.cfg) {
+    const vipInfo = await this.getVipInfo(shopInfo.shopId)
+    for (const item of vipInfo.cfg) {
       if (!item.price) continue
-      if (item.level === payload.level) this.setData({selectedIdx: idx})        
+      if (item.level === vipInfo.level) this.setData({selectedIdx: idx})        
       if (item.price) cfg.push(item)
       idx += 1;
     }
     this.setData({cfg})
-    this.setData({amount: payload.amount})
-    this.setData({currLevel: payload.level})
-    this.setData({expiredTime: payload.expiredTime})
+    this.setData({amount: vipInfo.amount})
+    this.setData({currLevel: vipInfo.level})
+    this.setData({expiredTime: vipInfo.expiredTime})
     this.setData({shopInfo})
     this.formatText()
     this.formatVipText()
     
   },
+  async getVipInfo (shopId) {
+    wx.showLoading({mask: true})
+    try {
+      const token = await util.getToken()
+      const {globalData: {apiPath}} = getApp();
+      const {data} = await http.post(`${apiPath}/album/GetVipInfo`,
+        {shopId},
+        {Authorization: token}
+      );
+      if (data.code !== 0) {
+        throw new Error(data.msg || data.message || '系统繁忙，请稍后重试～*')
+      }
+      return data.data
+    } finally {
+      wx.hideLoading()
+    }
+  },
+
   async queryOrder(id, shopId) {
     const token = await util.getToken()
     const {globalData: {apiPath}} = getApp();
@@ -68,8 +86,8 @@ Page({
     let pass = false
     if (money === 0) {
       const res = await wx.showModal({
-        title: '确定升级画册？',
-        content: '（注：画册升级后不支持降级）',
+        title: '确定升级图册？',
+        content: '（注：图册升级后不支持降级）',
       })
       if (res.cancel) return
     }

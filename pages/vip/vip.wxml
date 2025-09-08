@@ -57,10 +57,15 @@
     <view class="item-name">图片数量</view>
     <view class="item-desc">每个产品可上传<view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).imgC}}</view>张图片</view>
   </view>
-   <view class="item">
+   <!-- <view class="item">
     <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/size.png"></image></view>
     <view class="item-name">图片大小</view>
     <view class="item-desc">支持 <view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).imgS}}</view> M 大图上传</view>
+  </view> -->
+  <view class="item">
+    <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/quanxian.png"></image></view>
+    <view class="item-name">详情图</view>
+    <view class="item-desc">每个产品可上传<view class="count-style">{{m1.getCurrentInfo(selectedIdx, cfg).descImgC}}</view>张详情图</view>
   </view>
   <view class="item">
     <view class="icon"><image class="icon-img" mode="aspectFill" src="../../assets/gaoqing.png"></image></view>

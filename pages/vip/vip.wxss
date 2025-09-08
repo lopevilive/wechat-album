@@ -114,6 +114,7 @@
 
 .btn-wrap {
   margin-top: 50rpx;
+  padding-bottom: 50rpx;
 }
 
 .btn-wrap .btn {

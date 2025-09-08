@@ -56,7 +56,7 @@ Page({
       rawInstance = newInstance
       rawPathName = rawInstance.getPathName()
     }
-    if (/\/product-manage\/(\d+)$/.test(rawPathName)) { // 用户画册首页
+    if (/\/product-manage\/(\d+)$/.test(rawPathName)) { // 用户图册首页
       pass = true
       shopId = RegExp.$1;
     }
@@ -67,9 +67,9 @@ Page({
       isInventory = true
     }
     if (pass === false) {
-      if (/\/product-manage\/(\d+)\/*/.test(rawPathName)) { // 其他产品页，比如编辑产品页，这时候跳转回画册首页
+      if (/\/product-manage\/(\d+)\/*/.test(rawPathName)) { // 其他产品页，比如编辑产品页，这时候跳转回图册首页
         pass = true
-        title = '小果画册'
+        title = '小果图册'
         imageUrl = '../../assets/logo.png'
         shopId = RegExp.$1;
         let newInstance = new utils.UrlTools(`/product-manage/${shopId}`)
@@ -83,7 +83,7 @@ Page({
       newInstance.addQuery(rawInstance.getQuery())
       rawInstance = newInstance
       rawPathName = rawInstance.getPathName()
-      title = '小果画册'
+      title = '小果图册'
       imageUrl = '../../assets/logo.png'
     }
 
@@ -100,7 +100,7 @@ Page({
           })
           if (isAdmin !== 1 && !isInventory) { //  清单列表不需要限制
             let newInstance = new utils.UrlTools(`/`)
-            title = '小果画册'
+            title = '小果图册'
             imageUrl = '../../assets/logo.png'
             newInstance.addQuery(rawInstance.getQuery())
             rawInstance = newInstance
@@ -118,7 +118,7 @@ Page({
     // }
     if (!imageUrl) imageUrl = '../../assets/logo.png'
     let ret = {
-      title: `${title || '小果画册'}`,
+      title: `${title || '小果图册'}`,
       path: `/pages/index/index?src_path=${encodeURIComponent(src_path)}`,
       imageUrl
     }
