@@ -1,3 +1,11 @@
 <!--index.wxml-->
-<web-view src="{{web_src}}" bindmessage="onMessageHandle"> </web-view>
+<!-- <web-view src="{{web_src}}" bindmessage="onMessageHandle"> </web-view> -->
 
+<page-container
+  show="{{true}}"
+  overlay="{{false}}"
+  bind:beforeleave="onPageContainerBeforeLeave"
+  custom-style="height: 100vh; position: fixed; top: 0; left: 0; width: 100%;"
+>
+  <web-view src="{{web_src}}" bindmessage="onMessageHandle"> </web-view>
+</page-container>
