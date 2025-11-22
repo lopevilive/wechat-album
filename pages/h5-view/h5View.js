@@ -11,14 +11,6 @@ Page({
       web_src = decodeURIComponent(web_src)
       this.setData({ web_src })
     }
-    wx.getSystemInfo({
-      success: (res) => {
-        console.log(wx.disableSwipeBack)
-        if (res.platform === 'ios') {
-          wx.disableSwipeBack();
-        }
-      }
-    });
   },
   handleMessageRouter (e) {
     const data = e.detail?.data || []
@@ -133,6 +125,12 @@ Page({
     return ret
   },
   onPageContainerBeforeLeave() {
+    // wx.navigateBack()
+    // if (getApp().globalData.webVeiwName === 'home') {
+    //   console.log('match')
+    //   wx.navigateBack()
+    //   return undefined
+    // }
     return false
   }
 })
