@@ -58,15 +58,22 @@ Page({
       wx.showLoading({ title: '正在生成海报~'})
       const {globalData: {apiPath}} = getApp();
       const {scene} = this.data
-      const {data} = await http.post(`${apiPath}/album/Getwxacodeunlimit`, {scene: decodeURIComponent(scene)})
+      const {url, title, desc1, desc2} = this.data.info
+      // const {data} = await http.post(`${apiPath}/album/Getwxacodeunlimit`, {scene: decodeURIComponent(scene)})
+      const {data} = await http.post(`${apiPath}/album/GetSharePoster`, {
+        scene: decodeURIComponent(scene),
+        url, title, desc1, desc2
+      })
       if (data.code === 0) {
+        console.log(data)
         let picUrl = "data:image/png;base64,"+data.data
-        this.setData({qrcodeUrl: picUrl})
-        this.createPoster()
+        this.setData({image: picUrl})
+        // this.setData({qrcodeUrl: picUrl})
+        // this.createPoster()
       } else {
         console.error(data)
-        wx.hideLoading()
       }
+      wx.hideLoading()
     } catch(e) {
       console.error(e)
       wx.hideLoading()
@@ -95,23 +102,78 @@ Page({
       image: e.detail.path,
     });
   },
-  saveImage() {
-    wx.saveImageToPhotosAlbum({
-      filePath: this.data.image,
-      success: () => {
-        wx.showToast({
-          title: '保存成功',
-          icon: 'success',
-          duration: 2000
-        })
-      },
-      fail: () => {
-        wx.showToast({
-          title: '保存失败，请允许添加到相册',
-          duration: 2000
-        })
-      }
-    });
+  async saveImage() {
+    const base64Data = this.data.image;
+
+    if (!base64Data || !base64Data.startsWith('data:image')) {
+      return wx.showToast({ title: '图片生成中，请稍后', icon: 'none' });
+    }
+
+    try {
+      wx.showLoading({ title: '正在保存...', mask: true });
+
+      // 1. 提取 Base64 纯数据和后缀名
+      const reg = /data:image\/(\w+);base64,(.*)/;
+      const match = base64Data.match(reg);
+      if (!match) throw new Error('Base64格式错误');
+
+      const fileExt = match[1] || 'png';
+      const bodyData = match[2];
+
+      // 2. 利用文件管理器写入本地临时文件
+      const fsm = wx.getFileSystemManager();
+      // 定义一个唯一的临时路径
+      const fileName = `poster_${Date.now()}.${fileExt}`;
+      const filePath = `${wx.env.USER_DATA_PATH}/${fileName}`;
+
+      // 同步/异步写入均可，这里用异步更符合小程序规范
+      await new Promise((resolve, reject) => {
+        fsm.writeFile({
+          filePath,
+          data: bodyData,
+          encoding: 'base64',
+          success: resolve,
+          fail: reject
+        });
+      });
+
+      // 3. 保存到系统相册
+      wx.saveImageToPhotosAlbum({
+        filePath: filePath,
+        success: () => {
+          wx.showToast({ title: '已保存到相册', icon: 'success' });
+        },
+        fail: (err) => {
+          console.error('saveImageToPhotosAlbum fail:', err);
+          // 处理用户拒绝授权的情况
+          if (err.errMsg.includes('auth deny') || err.errMsg.includes('authorize:fail')) {
+            wx.showModal({
+              title: '授权提示',
+              content: '需要您授权保存图片到相册的权限才能保存',
+              confirmText: '去设置',
+              success: (res) => {
+                if (res.confirm) wx.openSetting();
+              }
+            });
+          } else {
+            wx.showToast({ title: '保存失败', icon: 'none' });
+          }
+        },
+        complete: () => {
+          wx.hideLoading();
+          // 4. 无论成功失败，清理掉这个临时文件，释放小程序存储空间
+          fsm.unlink({ 
+            filePath,
+            fail: (e) => console.warn('清理临时文件失败', e)
+          });
+        }
+      })
+
+    } catch (error) {
+      wx.hideLoading();
+      console.error('saveImage Error:', error);
+      wx.showToast({ title: '图片处理异常', icon: 'none' });
+    }
   },
   async downloadExcel () {
     const {globalData: {apiPath}} = getApp();
