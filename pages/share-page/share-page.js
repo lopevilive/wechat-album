@@ -24,35 +24,6 @@ Page({
     paintPallette: {},
     forwardPermi: 0,
   },
-  createPoster() {
-    let paintObj = { width: '700rpx', height: '1000rpx', background: '#f3b24b', views: [] }
-    const { qrcodeUrl } = this.data
-    const {url, title, desc1, desc2} = this.data.info
-    paintObj.views.push({ type: 'rect', css: { top: '260rpx', left: '50rpx', color: 'rgba(255, 255, 255, 1)', width: '600rpx', height: '600rpx', borderRadius: '50%'}})
-    paintObj.views.push({id: 'image-qrcode', type: 'image', url: qrcodeUrl, css: {top: '280rpx', left: '70rpx', width: '560rpx', height: '560rpx'}})
-    paintObj.views.push({id: 'image-url', type: 'image',url: `https:${url}`, css: {top: '435rpx', left: '225rpx', width: '250rpx', height: '250rpx', borderRadius: '50%'}})
-
-    paintObj.views.push({type: 'text', text: '微信扫描或长按识别进入小程序', css: {top: '900rpx', left: '0rpx', fontSize: '24rpx', width: '100%', maxLines: '1', color: '#fff', textAlign: 'center'}})
-    paintObj.views.push({type: 'text', text: replaceStr(title), css: {top: '50rpx', left: '40rpx', fontSize: '40rpx', width: '620rpx', maxLines: '1', color: '#fff', fontWeight: 'bold'}})
-    if (desc1?.length) {
-      paintObj.views.push({type: 'text', text: replaceStr(desc1[0]), css: {top: '130rpx', left: '40rpx', fontSize: '32rpx', width: '620rpx', maxLines: '1', color: '#fff'}})
-    }
-    if (desc2?.length) {
-      paintObj.views.push({type: 'text', text: replaceStr(desc2[0]), css: {top: '200rpx', left: '40rpx', fontSize: '24rpx', width: '620rpx', maxLines: '1', color: '#fff'}})
-    }
-    // paintObj.views.push({id: 'image-url', type: 'image',url: `https:${url}`, css: {top: '0rpx', left: '0rpx', width: '100%', height: '700rpx'}})
-    // paintObj.views.push({id: 'image-qrcode', type: 'image', url: qrcodeUrl, css: {top: '750rpx', left: '470rpx', width: '200rpx', height: '200rpx'}})
-    // // title
-    // paintObj.views.push({type: 'text', text: title, css: {top: '750rpx', left: '40rpx', fontSize: '40rpx', width: '420rpx', maxLines: '1'}})
-    // if (desc1.length) {
-    //   paintObj.views.push({type: 'text', text: desc1[0], css: {top: '820rpx', left: '40rpx', fontSize: '32rpx', width: '420rpx', maxLines: '1', color: '#aaaaaa'}})
-    // }
-    // if (desc2.length) {
-    //   paintObj.views.push({type: 'text', text: desc2[0], css: {top: '900rpx', left: '40rpx', fontSize: '24rpx', width: '420rpx', maxLines: '1', color: '#aaaaaa'}})
-    // }
-    this.setData({paintPallette: paintObj})
-
-  },
   async getQrCode() {
     try {
       wx.showLoading({ title: '正在生成海报~'})
@@ -68,8 +39,6 @@ Page({
         console.log(data)
         let picUrl = "data:image/png;base64,"+data.data
         this.setData({image: picUrl})
-        // this.setData({qrcodeUrl: picUrl})
-        // this.createPoster()
       } else {
         console.error(data)
       }

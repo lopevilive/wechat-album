@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="loading-box" wx:if="{{isProcessing}}">
+    <view class="spinner"></view>
+    <view class="title">正在准备清单</view>
+    <view class="progress-bar">
+      <view class="progress-inner" style="width: {{progress}}%"></view>
+    </view>
+    <view class="tips">文件生成中，请勿关闭页面</view>
+  </view>
+
+  <view class="success-box" wx:elif="{{tempFilePath}}">
+    <icon type="success" size="80" color="#07c160"></icon>
+    <view class="title">文件已生成</view>
+    
+    <button class="main-btn" bindtap="handleTapShare" type="primary">
+      保存
+    </button>
+
+    <view class="back-link" bindtap="goBack">返回</view>
+  </view>
+
+  <view class="error-box" wx:else>
+    <icon type="warn" size="80"></icon>
+    <view class="title">导出失败</view>
+    <button class="main-btn retry-btn" bindtap="goBack">返回重试</button>
+  </view>
+</view>
