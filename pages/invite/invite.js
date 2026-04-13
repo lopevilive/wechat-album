@@ -5,6 +5,7 @@ Page({
     info: {
       nickName: '',
       shopName: '',
+      adminName: '',
       inviteId: '',
       url: '',
       shopId: '',
@@ -16,10 +17,10 @@ Page({
     this.setData({info})
   },
   onShareAppMessage(){
-    const {shopName, inviteId, url, shopId} = this.data.info
+    const {shopName, inviteId, url, shopId, adminName} = this.data.info
     const src_path = `/product-manage/${shopId}/staff-verify/${inviteId}`
     return {
-      title: `${shopName} 邀请您成为管理员～`,
+      title: `${shopName} 邀请您成为${adminName}～`,
       imageUrl: `https:${url}`,
       path: `/pages/index/index?src_path=${encodeURIComponent(src_path)}`
     }

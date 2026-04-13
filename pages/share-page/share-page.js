@@ -16,7 +16,7 @@ Page({
     noExport: '', // 禁止导出
     info: {
       // src_path: '/product-manage/12', // 路径
-      // url: '//upload-1259129443.cos.ap-guangzhou.myqcloud.com/12_3_5a39773610c690a655d26851f6d49086.jpg?imageMogr2/quality/40', // 图片地址
+      // url: 'xxxxx', // 图片地址
       // title: '有礼喜坊', // 标题
       // desc1: ['乔迁之喜礼盒'],
       // desc2: ['2024/12/18 23:59']

@@ -69,8 +69,6 @@ Page({
     if (pass === false) {
       if (/\/product-manage\/(\d+)\/*/.test(rawPathName)) { // 其他产品页，比如编辑产品页，这时候跳转回图册首页
         pass = true
-        title = '小果图册'
-        imageUrl = '../../assets/logo.png'
         shopId = RegExp.$1;
         let newInstance = new utils.UrlTools(`/product-manage/${shopId}`)
         newInstance.addQuery(rawInstance.getQuery())
@@ -88,7 +86,7 @@ Page({
     }
 
     if (shopId) {
-      const { forwardInfo } =  getApp().globalData
+      const { forwardInfo } = getApp().globalData
       const infoItem = forwardInfo[shopId]
       if (infoItem) {
         const {forwardPermi, isAdmin} = infoItem

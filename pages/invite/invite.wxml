@@ -3,7 +3,7 @@
 <view class="img-wrap">
   <image class="img" mode="aspectFill" src="{{info.url}}"></image>
 </view>
-<view class="text">正在邀请 <view class="nick-name"> {{info.nickName}} </view> 成为管理员</view>
+<view class="text">正在邀请 <view class="nick-name"> {{info.nickName}} </view> 成为{{info.adminName}}</view>
 <button type="primary" open-type="share">邀请</button>
 
   <!-- <view>login</view> -->
