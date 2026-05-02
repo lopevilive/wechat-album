@@ -51,20 +51,39 @@ Page({
   // 用户点击触发分享
   handleTapShare() {
     if (!this.data.tempFilePath) return;
+    const sysInfo = wx.getSystemInfoSync();
+    const isPC = sysInfo.platform === 'windows' || sysInfo.platform === 'mac';
 
-    wx.shareFileMessage({
-      filePath: this.data.tempFilePath,
-      fileName: this.data.fileName,
-      success: () => {
-        // 分享成功，提示并返回
-        wx.showToast({ title: '已发起分享', icon: 'success' });
-        setTimeout(() => { this.goBack(); }, 1200);
-      },
-      fail: (err) => {
-        // 如果是分享失败或取消，留在当前页让用户可以再次点击
-        console.log('用户取消或转发失败', err);
-      }
-    });
+    if (isPC) {
+      wx.openDocument({
+        filePath: this.data.tempFilePath,
+        showMenu: true, // 关键：开启后用户可以点击右上角“另存为”
+        fileType: 'pdf', // 建议明确指定类型，提高打开成功率
+        success: () => {
+          wx.showToast({ title: '已开启预览', icon: 'none' });
+        },
+        fail: (err) => {
+          console.error('预览失败', err);
+          wx.showModal({ title: '提示', content: '预览失败，请检查文件格式', showCancel: false });
+        }
+      });
+    } else {
+      wx.shareFileMessage({
+        filePath: this.data.tempFilePath,
+        fileName: this.data.fileName,
+        success: () => {
+          // 分享成功，提示并返回
+          wx.showToast({ title: '已发起分享', icon: 'success' });
+          setTimeout(() => { this.goBack(); }, 1200);
+        },
+        fail: (err) => {
+          // 如果是分享失败或取消，留在当前页让用户可以再次点击
+          console.log('用户取消或转发失败', err);
+        }
+      });
+    }
+
+
   },
 
   goBack() {

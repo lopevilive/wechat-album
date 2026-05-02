@@ -5,11 +5,17 @@ Page({
   data: {
     web_src: ''
   },
-  onLoad(options) {
+  async onLoad(options) {
     let {web_src} = options
     if (web_src) {
       web_src = decodeURIComponent(web_src)
-      this.setData({ web_src })
+      const urlInstance = new utils.UrlTools(web_src)
+      urlInstance.removeQuery('token')
+      const token = await utils.getToken()
+      urlInstance.addQuery({token})
+      const { globalData } = getApp();
+      const url = `${globalData.web_src}${urlInstance.getFullpath()}`
+      this.setData({ web_src: url })
     }
   },
   handleMessageRouter (e) {

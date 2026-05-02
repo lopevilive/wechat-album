@@ -22,6 +22,7 @@ Page({
   toH5 (token, src_path) {
     if (!src_path) src_path = '/'
     const urlInstance = new util.UrlTools(src_path)
+    urlInstance.removeQuery('token')
     urlInstance.addQuery({token})
     const deviceInfo = wx.getDeviceInfo()
     if (/(mac|windows)/.test(deviceInfo.platform)) {
