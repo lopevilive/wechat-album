@@ -148,13 +148,36 @@ const sleep = async (time = 100) => {
   })
 }
 
+/**
+ * 异步 confirm 弹窗封装
+ * @param {Object} options 同 wx.showModal 的配置参数，支持 title, content, confirmText 等
+ * @returns {Promise<Boolean>} 用户点击确定返回 true，点击取消返回 false
+ */
+const confirm = (options = {}) => {
+  return new Promise((resolve) => {
+    wx.showModal({
+      title: options.title || '提示',
+      content: options.content || '',
+      confirmText: options.confirmText || '确定',
+      cancelText: options.cancelText || '取消',
+      confirmColor: options.confirmColor || '#d97706', // 顺应你页面的金沙高亮色
+      ...options,
+      success: (res) => {
+        if (res.confirm) {
+          resolve(true) // 点击确定
+        } else {
+          resolve(false) // 点击取消或点击蒙层
+        }
+      },
+      fail: () => {
+        resolve(false)
+      }
+    })
+  })
+}
+
 
 
 module.exports = {
-  formatTime,
-  getLoginCode,
-  getToken,
-  UrlTools,
-  formatDate,
-  sleep
+  formatTime, getLoginCode, getToken, UrlTools, formatDate, sleep, confirm
 }

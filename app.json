@@ -8,6 +8,7 @@
     "pages/viewQrCode/viewQrCode",
     "pages/share-page/share-page",
     "pages/vip/vip",
+    "pages/vip-v2/vip-v2",
     "pages/download-page/downloadPage"
   ],
   "window": {

@@ -1,0 +1,161 @@
+<view class="header-card">
+  <view class="shop-box">
+    <image class="img-shop" mode="aspectFill" src="{{shopInfo.url || '../../assets/default-avatar.png'}}"></image>
+    <view class="right-content">
+      <view class="shop-name">{{shopInfo.name || '我的图册店铺'}}</view>
+      <view class="vip-status-tag {{currLevel > 0 ? 'is-vip' : ''}}">
+        <text class="iconfont icon-vip"></text> {{currVipText}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="tips-container">
+  <view class="tips-item">
+    <view class="tips-dot">•</view>
+    <view class="tips-content">
+      <text class="u-bold">升级提示：</text>在线升级会把剩下的时长自动换算成天数加进新套餐里。<text class="u-link" bindtap="toContactSys">如需补差价升级，请联系客服人工办理</text>。
+    </view>
+  </view>
+  <view class="tips-item">
+    <view class="tips-dot">•</view>
+    <view class="tips-content">永远都不会打折，随时买都是最低价～</view>
+  </view>
+  <view class="tips-item">
+    <view class="tips-dot">•</view>
+    <view class="tips-content">
+      如需开具发票或其他疑问，请<text class="u-link" bindtap="toContactSys">联系客服</text>。
+    </view>
+  </view>
+</view>
+
+<view class="section-title">
+  <text class="title-txt">选择套餐</text>
+</view>
+
+<view class="combo-vertical-list">
+  <view
+    class="combo-v-item {{index === selectedIdx ? 'active-item' : ''}} {{currLevel > item.level ? 'disabled-item' : ''}}"
+    wx:for="{{cfg}}" 
+    wx:key="level"
+    bindtap="itemClickHandle"
+    data-idx="{{index}}"
+  >
+    <view class="v-badge" wx:if="{{item.level === 1}}">热门推荐</view>
+    <view class="v-badge gold" wx:if="{{item.level === 3}}">高性价比</view>
+    <view class="v-badge current" wx:if="{{currLevel === item.level}}">当前版本</view>
+
+    <view class="card-header">
+      <view class="v-left">
+        <view class="v-name">
+          <text class="v-level-tag">L{{item.level}}</text>
+          {{item.level === 0 ? '免费基础版' : item.limit + ' 容量会员'}}
+        </view>
+      </view>
+      <view class="v-right">
+        <view class="price-content">
+          <text class="unit">¥</text>
+          <text class="num">{{item.price / 100}}</text>
+          <text class="time-unit">/ 年</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card-line"></view>
+
+    <view class="card-rights-inner">
+      <view class="inner-right-row">
+        <image class="inner-icon" src="../../assets/rongliang.png"></image>
+        <view class="inner-meta">
+          <text class="inner-name">产品容量：</text>
+          <text class="inner-val">可上传 <text class="bold-txt">{{item.limit}}</text> 个产品</text>
+        </view>
+      </view>
+
+      <view class="inner-right-row">
+        <image class="inner-icon" src="../../assets/quanxian.png"></image>
+        <view class="inner-meta">
+          <text class="inner-name">每产品主图：</text>
+          <text class="inner-val">可传 <text class="bold-txt">{{item.imgC}}</text> 张图片</text>
+        </view>
+      </view>
+
+      <view class="inner-right-row">
+        <image class="inner-icon" src="../../assets/gaoqing.png"></image>
+        <view class="inner-meta">
+          <text class="inner-name">产品详情图：</text>
+          <text class="inner-val">可传 <text class="bold-txt">{{item.descImgC}}</text> 张详情图</text>
+        </view>
+      </view>
+
+      <view class="inner-right-row {{item.level === 0 ? 'lock-right' : ''}}">
+        <image class="inner-icon" src="../../assets/shuiyin.png"></image>
+        <view class="inner-meta">
+          <text class="inner-name">图片水印：</text>
+          <text class="inner-val">图片自动添加水印</text>
+        </view>
+      </view>
+
+      <view class="inner-right-row {{item.level === 0 ? 'lock-right' : ''}} font-lock">
+        <image class="inner-icon" src="../../assets/yinsi.png"></image>
+        <view class="inner-meta">
+          <text class="inner-name">转发安全保护：</text>
+          <text class="inner-val">支持仅管理员可转发</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="select-checked-box" wx:if="{{index === selectedIdx}}">
+      <view class="arrow-down"></view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{ !(currLevel === 0 && selectedIdx === 0) }}">
+  <view class="bottom-bar-placeholder"></view>
+  <view class="bottom-action-bar">
+    <button class="action-btn" bindtap="confirmSub">
+      {{displayText}}
+    </button>
+  </view>
+</block>
+
+<view class="modal-mask {{showPayModal ? 'mask-show' : ''}}" bindtap="closePayModal" catchtouchmove="preventTouch"></view>
+<view class="payment-modal {{showPayModal ? 'modal-show' : ''}}" catchtouchmove="preventTouch">
+  <view class="modal-header">
+    <text class="modal-title">确认支付</text>
+    <view class="modal-close" bindtap="closePayModal">✕</view>
+  </view>
+
+  <view class="modal-body">
+    <view class="pay-price-box">
+      <text class="p-unit">¥</text>
+      <text class="p-num">{{targetVip.price / 100}}</text>
+      <text class="p-time">/年</text>
+    </view>
+
+    <view class="pay-order-info">
+      <view class="info-item">
+        <text class="label">会员等级</text>
+        <text class="val">{{targetVip.limit}} 容量会员 (L{{targetVip.level}})</text>
+      </view>
+      <view class="info-item">
+        <text class="label">服务时长</text>
+        <text class="val">1年</text>
+      </view>
+
+      <view class="upgrade-info-card" wx:if="{{isUpgrade}}">
+        <view class="u-tip-head">💡 在线升级提示：</view>
+        <view class="u-tip-content">
+          系统会自动将原套餐剩余时长换算为天数，合并计入新套餐中。
+        </view>
+      </view>
+    </view>
+
+    <button class="pay-confirm-btn" bindtap="executePay">立即支付</button>
+    
+    <view class="pay-help-link" bindtap="toContactSys" wx:if="{{isUpgrade}}">
+      想补差价人工升级？点击联系客服 →
+    </view>
+  </view>
+</view>

@@ -170,7 +170,7 @@ Page({
   },
   toContactSys() {
     const payload = {
-      qrcodeUrl: '//upload-1259129443.cos.ap-guangzhou.myqcloud.com/5_3_dda7b2170dac6b8a161f072b4b6a62b9.jpg',
+      qrcodeUrl: '//upload-1259129443.cos.ap-guangzhou.myqcloud.com/5_3_29b2bda2e6e0ad0c116103b827a2983d.jpg?imageMogr2/quality/40',
       message: `长按识别二维码～`
     }
     let payloadStr = encodeURIComponent(JSON.stringify(payload))

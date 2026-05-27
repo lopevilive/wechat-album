@@ -1,0 +1,508 @@
+/* ==========================================================================
+   1. 全局基础样式与页面适配
+   ========================================================================== */
+page {
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  color: #334155;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ==========================================================================
+   2. 头部店铺精美卡片
+   ========================================================================== */
+.header-card {
+  margin: 30rpx;
+  padding: 40rpx 30rpx;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 24rpx;
+  box-shadow: 0 10rpx 30rpx rgba(15, 23, 42, 0.15);
+}
+
+.shop-box {
+  display: flex;
+  align-items: center;
+}
+
+.header-card .img-shop {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.2);
+  margin-right: 24rpx;
+  background-color: #f1f5f9;
+}
+
+.header-card .shop-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.header-card .vip-status-tag {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #94a3b8;
+  margin-top: 12rpx;
+}
+
+.header-card .vip-status-tag.is-vip {
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   3. 区域公用标题
+   ========================================================================== */
+.section-title {
+  margin: 40rpx 30rpx 20rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title .title-txt {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1e293b;
+  position: relative;
+}
+
+/* ==========================================================================
+   4. 垂直平铺套餐大卡片
+   ========================================================================== */
+.combo-vertical-list {
+  padding: 0 30rpx;
+}
+
+.combo-v-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 3rpx solid #e2e8f0;
+  border-radius: 24rpx;
+  padding: 36rpx 30rpx;
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.01);
+}
+
+/* 选中高亮状态：温暖轻奢金沙色调 */
+.combo-v-item.active-item {
+  border-color: #d97706;
+  background: linear-gradient(180deg, #fef3c7 0%, #fffbeb 25%, #ffffff 100%);
+  box-shadow: 0 12rpx 24rpx rgba(217, 119, 6, 0.08);
+}
+
+.combo-v-item.active-item .v-name {
+  color: #78350f;
+  font-weight: 700;
+}
+
+.combo-v-item.active-item .v-level-tag {
+  background: #d97706;
+  color: #ffffff;
+}
+
+.combo-v-item.active-item .price-content {
+  color: #b45309;
+}
+
+.combo-v-item.active-item .card-line {
+  background: rgba(217, 119, 6, 0.15);
+}
+
+/* 过滤掉的历史低版本置灰 */
+.combo-v-item.disabled-item {
+  background: #f8fafc;
+  border-color: #f1f5f9;
+  opacity: 0.5;
+}
+
+/* 卡片头部样式 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.v-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.v-name {
+  font-size: 32rpx;
+  color: #1e293b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.v-level-tag {
+  font-size: 20rpx;
+  background: #e2e8f0;
+  color: #64748b;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+  margin-right: 14rpx;
+  font-weight: 700;
+}
+
+.v-right {
+  text-align: right;
+}
+
+.combo-v-item .price-content {
+  display: flex;
+  align-items: baseline;
+  color: #1e293b;
+}
+
+.combo-v-item .price-content .unit {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+
+.combo-v-item .price-content .num {
+  font-size: 52rpx;
+  font-weight: 700;
+}
+
+.combo-v-item .time-unit {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-left: 6rpx;
+  font-weight: normal;
+}
+
+/* 卡片内部卡片折线 */
+.card-line {
+  height: 2rpx;
+  background: #f1f5f9;
+  margin: 24rpx 0;
+  width: 100%;
+}
+
+/* ==========================================================================
+   5. 内嵌全量权益平铺列表
+   ========================================================================== */
+.card-rights-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inner-right-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  transition: all 0.2s;
+}
+
+.inner-right-row:last-child {
+  margin-bottom: 0;
+}
+
+.inner-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.inner-meta {
+  font-size: 24rpx;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.inner-name {
+  font-weight: 500;
+  color: #334155;
+}
+
+.inner-val {
+  color: #64748b;
+}
+
+.bold-txt {
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 4rpx;
+}
+
+/* 激活选中的卡片内字体特殊高亮 */
+.active-item .bold-txt {
+  color: #b45309;
+}
+
+/* 免费版无该权益时的置灰/锁死样式 */
+.lock-right {
+  opacity: 0.35;
+}
+
+.lock-right .inner-icon {
+  filter: grayscale(100%);
+}
+
+.lock-right .inner-val {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+/* 顶部右上角微标签 */
+.v-badge {
+  position: absolute;
+  top: 0;
+  right: 40rpx;
+  transform: translateY(-50%);
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 18rpx;
+  font-weight: 600;
+  padding: 4rpx 14rpx;
+  border-radius: 100rpx;
+  box-shadow: 0 4rpx 8rpx rgba(239, 68, 68, 0.2);
+}
+
+.v-badge.gold {
+  background: #d97706;
+  box-shadow: 0 4rpx 8rpx rgba(217, 119, 6, 0.2);
+}
+
+.v-badge.current {
+  background: #475569;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   6. 优化后的温馨提示区域（规整排版，完美对齐）
+   ========================================================================== */
+.tips-container {
+  background: #f1f5f9; 
+  padding: 32rpx 28rpx;
+  border-radius: 16rpx;
+  margin: 10rpx 30rpx 0rpx 30rpx;
+}
+
+.tips-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8rpx;
+}
+
+.tips-item:last-child {
+  margin-bottom: 0;
+}
+
+.tips-dot {
+  font-size: 28rpx;
+  color: #8a9aa9;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+  line-height: 40rpx;
+}
+
+.tips-content {
+  flex: 1;
+  font-size: 24rpx;
+  color: #5a6b7c; 
+  line-height: 40rpx;
+  text-align: justify;
+}
+
+.u-bold {
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.u-warn {
+  color: #fa5151;
+  font-weight: 600;
+}
+
+.u-highlight {
+  color: #07c160;
+  font-weight: 600;
+}
+
+.u-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 4rpx;
+}
+
+/* ==========================================================================
+   7. 底部吸底操作栏
+   ========================================================================== */
+.bottom-bar-placeholder {
+  height: 160rpx;
+}
+
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 20rpx 40rpx calc(20rpx + env(safe-area-inset-bottom)) 40rpx;
+  box-shadow: 0 -10rpx 30rpx rgba(0, 0, 0, 0.05);
+  z-index: 99;
+}
+
+.bottom-action-bar .action-btn {
+  width: 100% !important;
+  height: 92rpx;
+  line-height: 92rpx;
+  background: linear-gradient(90deg, #1e293b 0%, #475569 100%);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 50rpx;
+  border: none;
+  padding: 0;
+  box-shadow: 0 8rpx 20rpx rgba(30, 41, 59, 0.2);
+}
+
+.bottom-action-bar .action-btn:active {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   8. 自定义半屏收银台弹窗样式
+   ========================================================================== */
+.modal-mask {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.mask-show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.payment-modal {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #ffffff;
+  z-index: 1001;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  transform: translateY(100%);
+  transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.modal-show {
+  transform: translateY(0);
+}
+
+.modal-header {
+  padding: 40rpx;
+  text-align: center;
+  position: relative;
+}
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1e293b;
+}
+.modal-close {
+  position: absolute;
+  right: 40rpx; top: 40rpx;
+  font-size: 40rpx;
+  color: #94a3b8;
+  padding: 10rpx;
+}
+
+.modal-body {
+  padding: 0 50rpx 40rpx 50rpx;
+}
+
+.pay-price-box {
+  text-align: center;
+  margin-bottom: 50rpx;
+  color: #1e293b;
+}
+.pay-price-box .p-unit { font-size: 40rpx; font-weight: 700; }
+.pay-price-box .p-num { font-size: 80rpx; font-weight: 700; letter-spacing: -2rpx; }
+.pay-price-box .p-time { font-size: 28rpx; color: #64748b; margin-left: 10rpx; }
+
+.pay-order-info {
+  background: #f8fafc;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 50rpx;
+}
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  font-size: 26rpx;
+}
+.info-item .label { color: #64748b; }
+.info-item .val { color: #1e293b; font-weight: 600; }
+
+.upgrade-info-card {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background: #fffbeb;
+  border: 1rpx solid #fef3c7;
+  border-radius: 12rpx;
+}
+.u-tip-head {
+  font-size: 24rpx;
+  color: #b45309;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+.u-tip-content {
+  font-size: 22rpx;
+  color: #d97706;
+  line-height: 1.5;
+}
+
+/* 🛠️ 修复：强力充公微信原生 button 怪异样式，强制拉满居中对齐 */
+.pay-confirm-btn {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100rpx;
+  
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  background: #1e293b;
+  color: #ffffff;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  
+  margin: 40rpx 0 30rpx 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.pay-confirm-btn:active {
+  opacity: 0.9;
+}
+
+/* 🛠️ 修复：优化的客服蓝色链接，确保横向排版及完美居中适配 */
+.pay-help-link {
+  text-align: center;
+  font-size: 26rpx;
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: underline;
+  padding: 10rpx 0;
+  display: block;
+  width: 100%;
+}
