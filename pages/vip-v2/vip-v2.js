@@ -181,15 +181,15 @@ Page({
               wx.showModal({
                 title: '⚠️ 微信支付失败',
                 content: `错误代码: ${errCode}\n\n错误信息: ${errMsg}\n\n单号: ${data.data.outTradeNo || '未生成'}`,
-                confirmText: '复制信息',
+                confirmText: '确认',
                 cancelText: '关闭',
                 success: (res) => {
                   if (res.confirm) {
                     // 支持一键复制错误到剪贴板，方便你直接发到电脑端看
-                    wx.setClipboardData({
-                      data: `code: ${errCode}, msg: ${errMsg}, orderNo: ${data.data.outTradeNo}`,
-                      success: () => wx.showToast({ title: '复制成功', icon: 'success' })
-                    })
+                    // wx.setClipboardData({
+                    //   data: `code: ${errCode}, msg: ${errMsg}, orderNo: ${data.data.outTradeNo}`,
+                    //   success: () => wx.showToast({ title: '复制成功', icon: 'success' })
+                    // })
                   }
                 }
               })
