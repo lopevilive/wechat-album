@@ -179,21 +179,33 @@ Page({
             const errMsg = err.errMsg || '未知错误'
             if(errMsg.indexOf('cancel') === -1) {
               wx.showModal({
-                title: '⚠️ 微信支付失败',
-                content: `错误代码: ${errCode}\n\n错误信息: ${errMsg}\n\n单号: ${data.data.outTradeNo || '未生成'}`,
-                confirmText: '确认',
+                title: '提示',
+                content: `由于当前微信环境或版本限制，暂时无法直接唤起支付。您可以更新微信版本或联系客服开通～`,
+                confirmText: '联系客服',
                 cancelText: '关闭',
                 success: (res) => {
                   if (res.confirm) {
-                    // 支持一键复制错误到剪贴板，方便你直接发到电脑端看
-                    // wx.setClipboardData({
-                    //   data: `code: ${errCode}, msg: ${errMsg}, orderNo: ${data.data.outTradeNo}`,
-                    //   success: () => wx.showToast({ title: '复制成功', icon: 'success' })
-                    // })
+                    this.toContactSys()
                   }
                 }
               })
             }
+            // if(errMsg.indexOf('cancel') === -1) {
+            //   wx.showModal({
+            //     title: '⚠️ 微信支付失败',
+            //     content: `错误代码: ${errCode}\n\n错误信息: ${errMsg}\n\n单号: ${data.data.outTradeNo || '未生成'}`,
+            //     confirmText: '复制错误',
+            //     cancelText: '关闭',
+            //     success: (res) => {
+            //       if (res.confirm) {
+            //         wx.setClipboardData({
+            //           data: `code: ${errCode}, msg: ${errMsg}, orderNo: ${data.data.outTradeNo}`,
+            //           success: () => wx.showToast({ title: '复制成功', icon: 'success' })
+            //         })
+            //       }
+            //     }
+            //   })
+            // }
             resolve(false)
           }
         })
