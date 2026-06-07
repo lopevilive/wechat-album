@@ -183,34 +183,32 @@ page {
 .card-line {
   height: 2rpx;
   background: #f1f5f9;
-  margin: 24rpx 0;
+  margin: 24rpx 0 16rpx 0;
   width: 100%;
 }
 
 /* ==========================================================================
-   5. 内嵌全量权益平铺列表
+   5. 内嵌全量权益平铺列表 (图文基础部分 - 双列)
    ========================================================================== */
 .card-rights-inner {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   width: 100%;
 }
 
 .inner-right-row {
   display: flex;
   align-items: center;
+  width: 50%;
   margin-bottom: 16rpx;
-  transition: all 0.2s;
-}
-
-.inner-right-row:last-child {
-  margin-bottom: 0;
+  box-sizing: border-box;
+  padding-right: 10rpx;
 }
 
 .inner-icon {
   width: 32rpx;
   height: 32rpx;
-  margin-right: 16rpx;
+  margin-right: 12rpx;
   flex-shrink: 0;
 }
 
@@ -218,6 +216,7 @@ page {
   font-size: 24rpx;
   color: #475569;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .inner-name {
@@ -232,26 +231,96 @@ page {
 .bold-txt {
   font-weight: 700;
   color: #1e293b;
-  margin: 0 4rpx;
 }
 
-/* 激活选中的卡片内字体特殊高亮 */
 .active-item .bold-txt {
   color: #b45309;
 }
 
-/* 免费版无该权益时的置灰/锁死样式 */
 .lock-right {
-  opacity: 0.35;
+  opacity: 0.4;
+}
+.lock-right .inner-icon { filter: grayscale(100%); }
+.lock-right .inner-val { text-decoration: line-through; color: #94a3b8; }
+
+/* 🌟 新增：专属视频核心权益模块（打包聚焦、防御纠纷） */
+.video-rights-card {
+  margin-top: 14rpx;
+  background: #f1f5f9;
+  border-radius: 14rpx;
+  padding: 16rpx 20rpx;
+  border: 1rpx solid #e2e8f0;
 }
 
-.lock-right .inner-icon {
-  filter: grayscale(100%);
+/* 当大卡片被选中激活时，视频小版块切换为更显眼的浅金沙底色，保证色调统一 */
+.active-item .video-rights-card {
+  background: #fffbeb;
+  border-color: #fde68a;
 }
 
-.lock-right .inner-val {
-  text-decoration: line-through;
-  color: #94a3b8;
+.video-card-title {
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #475569;
+  font-weight: 600;
+  margin-bottom: 14rpx;
+}
+.active-item .video-card-title {
+  color: #92400e;
+}
+
+.video-title-icon {
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 8rpx;
+}
+
+.video-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-grid-item {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-grid-item .v-label {
+  font-size: 22rpx;
+  color: #64748b;
+  margin-bottom: 4rpx;
+}
+.active-item .video-grid-item .v-label {
+  color: #b45309;
+}
+
+.video-grid-item .v-value {
+  font-size: 24rpx;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* 大字号突出数值，避免看不清限制 */
+.v-num-big {
+  font-size: 34rpx;
+  font-weight: 800;
+  color: #0f172a;
+  margin-right: 4rpx;
+}
+.active-item .v-num-big {
+  color: #78350f;
+}
+
+/* 时长等极重要限制使用高危警告红，无限使用轻奢尊贵金 */
+.v-num-big.m-warn {
+  color: #e11d48 !important; /* 警告红 */
+}
+.highlight-orange {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #d97706 !important;
 }
 
 /* 顶部右上角微标签 */
@@ -280,7 +349,7 @@ page {
 }
 
 /* ==========================================================================
-   6. 优化后的温馨提示区域（规整排版，完美对齐）
+   6. 优化后的温馨提示区域
    ========================================================================== */
 .tips-container {
   background: #f1f5f9; 
@@ -315,27 +384,10 @@ page {
   text-align: justify;
 }
 
-.u-bold {
-  font-weight: bold;
-  color: #1e293b;
-}
-
-.u-warn {
-  color: #fa5151;
-  font-weight: 600;
-}
-
-.u-highlight {
-  color: #07c160;
-  font-weight: 600;
-}
-
-.u-link {
-  color: #2563eb;
-  font-weight: 600;
-  text-decoration: underline;
-  margin-left: 4rpx;
-}
+.u-bold { font-weight: bold; color: #1e293b; }
+.u-warn { color: #fa5151; font-weight: 600; }
+.u-highlight { color: #07c160; font-weight: 600; }
+.u-link { color: #2563eb; font-weight: 600; text-decoration: underline; margin-left: 4rpx; }
 
 /* ==========================================================================
    7. 底部吸底操作栏
@@ -385,10 +437,7 @@ page {
   opacity: 0;
   transition: all 0.3s ease;
 }
-.mask-show {
-  visibility: visible;
-  opacity: 1;
-}
+.mask-show { visibility: visible; opacity: 1; }
 
 .payment-modal {
   position: fixed;
@@ -401,108 +450,42 @@ page {
   transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
   padding-bottom: env(safe-area-inset-bottom);
 }
-.modal-show {
-  transform: translateY(0);
-}
+.modal-show { transform: translateY(0); }
 
-.modal-header {
-  padding: 40rpx;
-  text-align: center;
-  position: relative;
-}
-.modal-title {
-  font-size: 34rpx;
-  font-weight: 700;
-  color: #1e293b;
-}
-.modal-close {
-  position: absolute;
-  right: 40rpx; top: 40rpx;
-  font-size: 40rpx;
-  color: #94a3b8;
-  padding: 10rpx;
-}
+.modal-header { padding: 40rpx; text-align: center; position: relative; }
+.modal-title { font-size: 34rpx; font-weight: 700; color: #1e293b; }
+.modal-close { position: absolute; right: 40rpx; top: 40rpx; font-size: 40rpx; color: #94a3b8; padding: 10rpx; }
+.modal-body { padding: 0 50rpx 40rpx 50rpx; }
 
-.modal-body {
-  padding: 0 50rpx 40rpx 50rpx;
-}
-
-.pay-price-box {
-  text-align: center;
-  margin-bottom: 50rpx;
-  color: #1e293b;
-}
+.pay-price-box { text-align: center; margin-bottom: 50rpx; color: #1e293b; }
 .pay-price-box .p-unit { font-size: 40rpx; font-weight: 700; }
 .pay-price-box .p-num { font-size: 80rpx; font-weight: 700; letter-spacing: -2rpx; }
 .pay-price-box .p-time { font-size: 28rpx; color: #64748b; margin-left: 10rpx; }
 
-.pay-order-info {
-  background: #f8fafc;
-  border-radius: 20rpx;
-  padding: 30rpx;
-  margin-bottom: 50rpx;
-}
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20rpx;
-  font-size: 26rpx;
-}
+.pay-order-info { background: #f8fafc; border-radius: 20rpx; padding: 30rpx; margin-bottom: 50rpx; }
+.info-item { display: flex; justify-content: space-between; margin-bottom: 20rpx; font-size: 26rpx; }
 .info-item .label { color: #64748b; }
 .info-item .val { color: #1e293b; font-weight: 600; }
 
-.upgrade-info-card {
-  margin-top: 20rpx;
-  padding: 20rpx;
-  background: #fffbeb;
-  border: 1rpx solid #fef3c7;
-  border-radius: 12rpx;
-}
-.u-tip-head {
-  font-size: 24rpx;
-  color: #b45309;
-  font-weight: 700;
-  margin-bottom: 8rpx;
-}
-.u-tip-content {
-  font-size: 22rpx;
-  color: #d97706;
-  line-height: 1.5;
-}
+.upgrade-info-card { margin-top: 20rpx; padding: 20rpx; background: #fffbeb; border: 1rpx solid #fef3c7; border-radius: 12rpx; }
+.u-tip-head { font-size: 24rpx; color: #b45309; font-weight: 700; margin-bottom: 8rpx; }
+.u-tip-content { font-size: 22rpx; color: #d97706; line-height: 1.5; }
 
-/* 🛠️ 修复：强力充公微信原生 button 怪异样式，强制拉满居中对齐 */
 .pay-confirm-btn {
   width: 100% !important;
   max-width: 100% !important;
   height: 100rpx;
-  
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  
   background: #1e293b;
   color: #ffffff;
   border-radius: 50rpx;
   font-size: 32rpx;
   font-weight: 700;
-  
   margin: 40rpx 0 30rpx 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
 }
-
-.pay-confirm-btn:active {
-  opacity: 0.9;
-}
-
-/* 🛠️ 修复：优化的客服蓝色链接，确保横向排版及完美居中适配 */
-.pay-help-link {
-  text-align: center;
-  font-size: 26rpx;
-  color: #2563eb;
-  font-weight: 500;
-  text-decoration: underline;
-  padding: 10rpx 0;
-  display: block;
-  width: 100%;
-}
+.pay-confirm-btn:active { opacity: 0.9; }
+.pay-help-link { text-align: center; font-size: 26rpx; color: #2563eb; font-weight: 500; text-decoration: underline; padding: 10rpx 0; display: block; width: 100%; }

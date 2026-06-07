@@ -30,8 +30,22 @@ Page({
     const vipInfo = await this.getVipInfo(shopId)
     if (!vipInfo) return
 
-    const { level, expiredTime, cfg, amount } = vipInfo
+    let { level, expiredTime, cfg, amount } = vipInfo
+    cfg = cfg || []
     
+    // 遍历处理每一个套餐的视频时间文本转化
+    cfg.forEach(item => {
+      if (!item.videoS) {
+        item.videoSText = '10秒'
+      } else if (item.videoS < 60) {
+        item.videoSText = `${item.videoS}秒`
+      } else {
+        const m = Math.floor(item.videoS / 60)
+        const s = item.videoS % 60
+        item.videoSText = s > 0 ? `${m}分${s}秒` : `${m}分钟`
+      }
+    })
+
     let expiredTimeText = ''
     let isExpired = false 
     
@@ -51,7 +65,13 @@ Page({
       const currentCfg = cfg.find(item => item.level === level)
       const limit = currentCfg ? currentCfg.limit : 0
       const timeStatusText = isExpired ? `已于 ${expiredTimeText} 到期` : `${expiredTimeText} 到期`
-      currVipText = `${limit} 容量会员 (${timeStatusText})`
+      
+      // 🌟 优化：顶部当前店铺状态的 9999 无限容量名词转化
+      if (limit === 9999) {
+        currVipText = `无限容量尊享会员 (${timeStatusText})`
+      } else {
+        currVipText = `${limit} 容量会员 (${timeStatusText})`
+      }
     }
 
     let selectedIdx = 0

@@ -49,7 +49,9 @@
       <view class="v-left">
         <view class="v-name">
           <text class="v-level-tag">L{{item.level}}</text>
-          {{item.level === 0 ? '免费基础版' : item.limit + ' 容量会员'}}
+          <block wx:if="{{item.level === 0}}">免费基础版</block>
+          <block wx:elif="{{item.limit === 9999}}">无限容量尊享会员</block>
+          <block wx:else>{{item.limit}} 容量会员</block>
         </view>
       </view>
       <view class="v-right">
@@ -68,23 +70,26 @@
         <image class="inner-icon" src="../../assets/rongliang.png"></image>
         <view class="inner-meta">
           <text class="inner-name">产品容量：</text>
-          <text class="inner-val">可上传 <text class="bold-txt">{{item.limit}}</text> 个产品</text>
+          <text class="inner-val">
+            <block wx:if="{{item.limit === 9999}}"><text class="bold-txt" style="color: #be903f;">无限</text>产品</block>
+            <block wx:else><text class="bold-txt">{{item.limit}}</text>个</block>
+          </text>
         </view>
       </view>
 
       <view class="inner-right-row">
         <image class="inner-icon" src="../../assets/quanxian.png"></image>
         <view class="inner-meta">
-          <text class="inner-name">每产品主图：</text>
-          <text class="inner-val">可传 <text class="bold-txt">{{item.imgC}}</text> 张图片</text>
+          <text class="inner-name">产品主图：</text>
+          <text class="inner-val">可传 <text class="bold-txt">{{item.imgC}}</text> 张</text>
         </view>
       </view>
 
       <view class="inner-right-row">
         <image class="inner-icon" src="../../assets/gaoqing.png"></image>
         <view class="inner-meta">
-          <text class="inner-name">产品详情图：</text>
-          <text class="inner-val">可传 <text class="bold-txt">{{item.descImgC}}</text> 张详情图</text>
+          <text class="inner-name">产品详情：</text>
+          <text class="inner-val">可传 <text class="bold-txt">{{item.descImgC}}</text> 张</text>
         </view>
       </view>
 
@@ -92,15 +97,37 @@
         <image class="inner-icon" src="../../assets/shuiyin.png"></image>
         <view class="inner-meta">
           <text class="inner-name">图片水印：</text>
-          <text class="inner-val">图片自动添加水印</text>
+          <text class="inner-val">自动添加</text>
         </view>
       </view>
 
       <view class="inner-right-row {{item.level === 0 ? 'lock-right' : ''}} font-lock">
         <image class="inner-icon" src="../../assets/yinsi.png"></image>
         <view class="inner-meta">
-          <text class="inner-name">转发安全保护：</text>
-          <text class="inner-val">支持仅管理员可转发</text>
+          <text class="inner-name">转发保护：</text>
+          <text class="inner-val">仅管理员可转发</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="video-rights-card">
+      <view class="video-card-title">
+        <image class="video-title-icon" src="../../assets/shipin_num.png"></image>
+        <text>视频专属权益（单品限绑1个视频）</text>
+      </view>
+      <view class="video-grid">
+        <view class="video-grid-item">
+          <text class="v-label">视频容量</text>
+          <block wx:if="{{item.videoC === 9999}}">
+            <text class="v-value highlight-orange">无限个</text>
+          </block>
+          <block wx:else>
+            <text class="v-value"><text class="v-num-big">{{item.videoC}}</text>个</text>
+          </block>
+        </view>
+        <view class="video-grid-item">
+          <text class="v-label">单视频时长上限</text>
+          <text class="v-value"><text class="v-num-big m-warn">{{item.videoSText}}</text></text>
         </view>
       </view>
     </view>
@@ -137,7 +164,10 @@
     <view class="pay-order-info">
       <view class="info-item">
         <text class="label">会员等级</text>
-        <text class="val">{{targetVip.limit}} 容量会员 (L{{targetVip.level}})</text>
+        <text class="val">
+          <block wx:if="{{targetVip.limit === 9999}}">无限容量尊享会员 (L{{targetVip.level}})</block>
+          <block wx:else>{{targetVip.limit}} 容量会员 (L{{targetVip.level}})</block>
+        </text>
       </view>
       <view class="info-item">
         <text class="label">服务时长</text>
