@@ -113,7 +113,7 @@
     <view class="video-rights-card">
       <view class="video-card-title">
         <image class="video-title-icon" src="../../assets/shipin_num.png"></image>
-        <text>视频专属权益（单品限绑1个视频）</text>
+        <text>视频专属权益</text>
       </view>
       <view class="video-grid">
         <view class="video-grid-item">
