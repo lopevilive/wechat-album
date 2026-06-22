@@ -179,36 +179,135 @@ page {
   font-weight: normal;
 }
 
-/* 卡片内部卡片折线 */
+/* 卡片中间默认折线 */
 .card-line {
   height: 2rpx;
   background: #f1f5f9;
-  margin: 24rpx 0 16rpx 0;
+  margin: 24rpx 0 20rpx 0;
   width: 100%;
 }
 
 /* ==========================================================================
-   5. 内嵌全量权益平铺列表 (图文基础部分 - 双列)
+   ✨ 核心重构：纯平铺、无外框、绝对一根线对齐的核心产品容量行
+   ========================================================================== */
+.main-capacity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10rpx 4rpx; /* 彻底卸掉厚重的卡片外框，完全和下方的文字平齐 */
+  box-sizing: border-box;
+}
+
+.main-capacity-row .cap-left {
+  display: flex;
+  align-items: center;
+}
+
+/* 适当放大核心容量的图标，强化其排头兵的视觉分量 */
+.main-capacity-row .inner-icon-big {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
+.main-capacity-row .cap-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.main-capacity-row .cap-right {
+  display: flex;
+  align-items: baseline;
+}
+
+/* 核心大数字：在无框的极简状态下，依旧对标视频特大号 */
+.main-capacity-row .cap-num {
+  font-size: 38rpx;
+  font-weight: 800;
+  color: #0f172a;
+  margin-right: 6rpx;
+}
+
+.main-capacity-row .cap-unit {
+  font-size: 24rpx;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 核心容量与下方普通图文之间的辅助细线 */
+.card-line-thin {
+  height: 1rpx;
+  background: #f1f5f9;
+  margin: 16rpx 0 24rpx 0;
+  width: 100%;
+}
+.active-item .card-line-thin {
+  background: rgba(217, 119, 6, 0.12);
+}
+
+/* ---------- 核心数字/单位的高亮色系 ---------- */
+.main-capacity-row .vip-orange-text {
+  color: #d97706 !important;
+}
+.main-capacity-row .vip-gradient-text {
+  background: linear-gradient(135deg, #bf9546 0%, #8c6216 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.main-capacity-row .vip-unit {
+  color: #8c6216;
+  font-weight: 600;
+}
+.main-capacity-row .vip-spark-tag {
+  display: inline-block;
+  font-size: 16rpx;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  margin-left: 10rpx;
+  align-self: center;
+}
+
+/* ==========================================================================
+   5. 内嵌基础权益平铺列表（支持双列混合单全列）
    ========================================================================== */
 .card-rights-inner {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding-left: 4rpx; /* 与上方的核心容量图标实现“强迫症级”垂直对齐 */
+  box-sizing: border-box;
 }
 
 .inner-right-row {
   display: flex;
   align-items: center;
-  width: 50%;
-  margin-bottom: 16rpx;
+  margin-bottom: 22rpx; /* 增加行间距，确保页面有呼吸感 */
   box-sizing: border-box;
+}
+
+/* 50% 宽度的两列行（主图、详情、水印） */
+.half-row {
+  width: 50%;
   padding-right: 10rpx;
+}
+
+/* 100% 宽度的整行（专门拯救长文本的转发保护） */
+.full-row {
+  width: 100%;
+  margin-top: 2rpx;
 }
 
 .inner-icon {
   width: 32rpx;
   height: 32rpx;
-  margin-right: 12rpx;
+  margin-right: 14rpx;
   flex-shrink: 0;
 }
 
@@ -232,27 +331,30 @@ page {
   font-weight: 700;
   color: #1e293b;
 }
-
 .active-item .bold-txt {
   color: #b45309;
 }
 
+/* 免费版置灰锁定态 */
 .lock-right {
   opacity: 0.4;
 }
 .lock-right .inner-icon { filter: grayscale(100%); }
 .lock-right .inner-val { text-decoration: line-through; color: #94a3b8; }
 
-/* 🌟 新增：专属视频核心权益模块（打包聚焦、防御纠纷） */
+/* ==========================================================================
+   6. 视频专属权益模块
+   ========================================================================== */
 .video-rights-card {
   margin-top: 14rpx;
   background: #f1f5f9;
   border-radius: 14rpx;
   padding: 16rpx 20rpx;
   border: 1rpx solid #e2e8f0;
+  box-sizing: border-box;
 }
 
-/* 当大卡片被选中激活时，视频小版块切换为更显眼的浅金沙底色，保证色调统一 */
+/* 激活选中的大套餐时，下方的视频底色联动变为温润的金沙黄 */
 .active-item .video-rights-card {
   background: #fffbeb;
   border-color: #fde68a;
@@ -302,7 +404,7 @@ page {
   font-weight: 500;
 }
 
-/* 大字号突出数值，避免看不清限制 */
+/* 视频数字特大号突出 */
 .v-num-big {
   font-size: 34rpx;
   font-weight: 800;
@@ -315,7 +417,7 @@ page {
 
 /* 时长等极重要限制使用高危警告红，无限使用轻奢尊贵金 */
 .v-num-big.m-warn {
-  color: #e11d48 !important; /* 警告红 */
+  color: #e11d48 !important; 
 }
 .highlight-orange {
   font-size: 32rpx;
@@ -349,7 +451,7 @@ page {
 }
 
 /* ==========================================================================
-   6. 优化后的温馨提示区域
+   7. 底部温馨提示区域
    ========================================================================== */
 .tips-container {
   background: #f1f5f9; 
@@ -390,7 +492,7 @@ page {
 .u-link { color: #2563eb; font-weight: 600; text-decoration: underline; margin-left: 4rpx; }
 
 /* ==========================================================================
-   7. 底部吸底操作栏
+   8. 吸底固定的支付操作按钮栏
    ========================================================================== */
 .bottom-bar-placeholder {
   height: 160rpx;
@@ -426,7 +528,7 @@ page {
 }
 
 /* ==========================================================================
-   8. 自定义半屏收银台弹窗样式
+   9. 半屏微信支付收银台弹窗样式
    ========================================================================== */
 .modal-mask {
   position: fixed;

@@ -35,6 +35,7 @@
 
 <view class="combo-vertical-list">
   <view
+    id="card_level_{{item.level}}"
     class="combo-v-item {{index === selectedIdx ? 'active-item' : ''}} {{currLevel > item.level ? 'disabled-item' : ''}}"
     wx:for="{{cfg}}" 
     wx:key="level"
@@ -65,19 +66,28 @@
 
     <view class="card-line"></view>
 
-    <view class="card-rights-inner">
-      <view class="inner-right-row">
-        <image class="inner-icon" src="../../assets/rongliang.png"></image>
-        <view class="inner-meta">
-          <text class="inner-name">产品容量：</text>
-          <text class="inner-val">
-            <block wx:if="{{item.limit === 9999}}"><text class="bold-txt" style="color: #be903f;">无限</text>产品</block>
-            <block wx:else><text class="bold-txt">{{item.limit}}</text>个</block>
-          </text>
-        </view>
+    <view class="main-capacity-row">
+      <view class="cap-left">
+        <image class="inner-icon-big" src="../../assets/rongliang.png"></image>
+        <text class="cap-name">产品容量：</text>
       </view>
+      <view class="cap-right">
+        <block wx:if="{{item.limit === 9999}}">
+          <text class="cap-num vip-gradient-text">无限</text>
+          <text class="cap-unit vip-unit">产品</text>
+          <text class="vip-spark-tag">PRO</text>
+        </block>
+        <block wx:else>
+          <text class="cap-num {{item.level > 0 ? 'vip-orange-text' : ''}}">{{item.limit}}</text>
+          <text class="cap-unit">个产品</text>
+        </block>
+      </view>
+    </view>
 
-      <view class="inner-right-row">
+    <view class="card-line-thin"></view>
+
+    <view class="card-rights-inner">
+      <view class="inner-right-row half-row">
         <image class="inner-icon" src="../../assets/quanxian.png"></image>
         <view class="inner-meta">
           <text class="inner-name">产品主图：</text>
@@ -85,7 +95,7 @@
         </view>
       </view>
 
-      <view class="inner-right-row">
+      <view class="inner-right-row half-row">
         <image class="inner-icon" src="../../assets/gaoqing.png"></image>
         <view class="inner-meta">
           <text class="inner-name">产品详情：</text>
@@ -93,7 +103,7 @@
         </view>
       </view>
 
-      <view class="inner-right-row {{item.level === 0 ? 'lock-right' : ''}}">
+      <view class="inner-right-row half-row {{item.level === 0 ? 'lock-right' : ''}}">
         <image class="inner-icon" src="../../assets/shuiyin.png"></image>
         <view class="inner-meta">
           <text class="inner-name">图片水印：</text>
@@ -101,16 +111,16 @@
         </view>
       </view>
 
-      <view class="inner-right-row {{item.level === 0 ? 'lock-right' : ''}} font-lock">
+      <view class="inner-right-row full-row {{item.level === 0 ? 'lock-right' : ''}}">
         <image class="inner-icon" src="../../assets/yinsi.png"></image>
         <view class="inner-meta">
           <text class="inner-name">转发保护：</text>
-          <text class="inner-val">仅管理员可转发</text>
+          <text class="inner-val">开启后仅管理员可转发此图册</text>
         </view>
       </view>
     </view>
 
-    <view class="video-rights-card">
+    <view class="video-rights-card" wx:if="{{item.level > 0}}">
       <view class="video-card-title">
         <image class="video-title-icon" src="../../assets/shipin_num.png"></image>
         <text>视频专属权益</text>

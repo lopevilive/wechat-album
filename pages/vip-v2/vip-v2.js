@@ -66,7 +66,6 @@ Page({
       const limit = currentCfg ? currentCfg.limit : 0
       const timeStatusText = isExpired ? `已于 ${expiredTimeText} 到期` : `${expiredTimeText} 到期`
       
-      // 🌟 优化：顶部当前店铺状态的 9999 无限容量名词转化
       if (limit === 9999) {
         currVipText = `无限容量尊享会员 (${timeStatusText})`
       } else {
@@ -74,6 +73,7 @@ Page({
       }
     }
 
+    // 计算默认选中的索引
     let selectedIdx = 0
     if (level === 0 && cfg.length > 1) {
       selectedIdx = 1
@@ -93,6 +93,19 @@ Page({
     })
 
     this.updateButtonText()
+
+    // 🌟 核心优化：渲染完成后，平滑地让整个大页面滚动到默认选中的高级卡片位置
+    if (cfg[selectedIdx]) {
+      const targetLevel = cfg[selectedIdx].level
+      // 给小程序留 100ms 渲染缓冲区，确保高精度定位
+      setTimeout(() => {
+        wx.pageScrollTo({
+          selector: `#card_level_${targetLevel}`,
+          duration: 300, // 300ms 原生缓动动画，非常舒服
+          offsetTop: -20  // 向上稍微留出 20px 间距，不顶死屏幕边缘
+        })
+      }, 100)
+    }
   },
 
   async getVipInfo(shopId) {
@@ -143,12 +156,9 @@ Page({
     this.setData({ displayText })
   },
 
-  // 1. 唤起自定义半屏收银台
   confirmSub() {
     const { cfg, selectedIdx, currLevel } = this.data
     const targetVip = cfg[selectedIdx]
-
-    // 确定是否满足升级条件
     const isUpgrade = currLevel > 0 && targetVip.level > currLevel
 
     this.setData({
@@ -158,15 +168,13 @@ Page({
     })
   },
 
-  // 2. 关闭半屏弹窗
   closePayModal() {
     this.setData({ showPayModal: false })
   },
 
-  // 3. 真正被收银台触发的支付逻辑
   async executePay() {
     const { targetVip, shopInfo, currLevel } = this.data
-    this.closePayModal() // 唤起微信中间件前先收起自定义弹窗
+    this.closePayModal() 
     
     try {
       wx.showLoading({ mask: true, title: '准备支付...' })
@@ -194,8 +202,6 @@ Page({
             resolve(true)
           },
           fail: async (err) => {
-            // 提取核心错误信息，防止文本太长
-            const errCode = err.errCode || err.code || '无'
             const errMsg = err.errMsg || '未知错误'
             if(errMsg.indexOf('cancel') === -1) {
               wx.showModal({
@@ -231,11 +237,11 @@ Page({
         })
       })
       if (!pass) return
-      // 下面处理支付成功的逻辑
+
       const queryRet = await http.post(`${apiPath}/user/QueryVirtualOrder`, {
         shopId: shopInfo.shopId, outTradeNo: data.data.outTradeNo
       }, {Authorization: token})
-      // return
+
       wx.showToast({title: '开通成功～', icon: 'success'})
       await util.sleep(500)
       wx.reLaunch({url: `../index/index?src_path=${encodeURIComponent('/')}`})
@@ -247,7 +253,6 @@ Page({
     }
   },
 
-  // 防止滚动穿透虚化底层
   preventTouch() {},
 
   toContactSys() {
