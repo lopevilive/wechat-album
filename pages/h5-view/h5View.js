@@ -51,44 +51,44 @@ Page({
     if (imageUrl) {
       imageUrl = `https:${imageUrl}`
     }
-    let pass = false
+
     let shopId
-    if (/\/product-manage\/(\d+)\/product-detial\/(\d+)$/.test(rawPathName)) { // 产品详情
-      pass = true
-      shopId = RegExp.$1;
-      const prodId = RegExp.$2
-      let newInstance = new utils.UrlTools(`/product-manage/${shopId}?toDetial=${prodId}`)
-      newInstance.addQuery(rawInstance.getQuery())
-      rawInstance = newInstance
-      rawPathName = rawInstance.getPathName()
-    }
-    if (/\/product-manage\/(\d+)$/.test(rawPathName)) { // 用户图册首页
-      pass = true
-      shopId = RegExp.$1;
-    }
     let isInventory = false
-    if (/\/product-manage\/(\d+)\/view-inventory/.test(rawPathName)) { // 清单列表
-      pass  = true
-      shopId = RegExp.$1;
-      isInventory = true
-    }
-    if (pass === false) {
+    while (true) {
+      if (/\/product-manage\/(\d+)\/product-detial\/(\d+)$/.test(rawPathName)) { // 产品详情
+        shopId = RegExp.$1;
+        const prodId = RegExp.$2
+        let newInstance = new utils.UrlTools(`/product-manage/${shopId}?toDetial=${prodId}`)
+        newInstance.addQuery(rawInstance.getQuery())
+        rawInstance = newInstance
+        rawPathName = rawInstance.getPathName()
+        break
+      }
+      if (/\/product-manage\/(\d+)$/.test(rawPathName)) { // 某个图册首页
+        shopId = RegExp.$1;
+        break
+      }
+      if (/\/product-manage\/(\d+)\/view-inventory/.test(rawPathName)) { // 清单列表
+        shopId = RegExp.$1;
+        isInventory = true
+        break
+      }
       if (/\/product-manage\/(\d+)\/*/.test(rawPathName)) { // 其他产品页，比如编辑产品页，这时候跳转回图册首页
-        pass = true
         shopId = RegExp.$1;
         let newInstance = new utils.UrlTools(`/product-manage/${shopId}`)
         newInstance.addQuery(rawInstance.getQuery())
         rawInstance = newInstance
         rawPathName = rawInstance.getPathName()
+        break
       }
-    }
-    if (pass === false) { // 如果都不是，则跳转系统首页
+      // 如果不是以上链接，则跳转系统首页
       let newInstance = new utils.UrlTools(`/`)
       newInstance.addQuery(rawInstance.getQuery())
       rawInstance = newInstance
       rawPathName = rawInstance.getPathName()
       title = '小果图册'
       imageUrl = '../../assets/logo.png'
+      break
     }
 
     if (shopId) {
@@ -97,7 +97,7 @@ Page({
       if (infoItem) {
         const {forwardPermi, isAdmin} = infoItem
         if (forwardPermi === 1) {
-          wx.updateShareMenu({
+          wx.updateShareMenu({ // 这里让链接无法通过聊天记录转发
             isPrivateMessage: true,
             success: () => {},
             fail: () => {}
@@ -128,15 +128,6 @@ Page({
     }
     return ret
   },
-  onPageContainerBeforeLeave() {
-    // wx.navigateBack()
-    // if (getApp().globalData.webVeiwName === 'home') {
-    //   console.log('match')
-    //   wx.navigateBack()
-    //   return undefined
-    // }
-    return false
-  }
 })
 
 wx.showShareMenu({

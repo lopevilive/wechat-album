@@ -1,56 +1,159 @@
 /**index.wxss**/
+page {
+  overflow: hidden; /* 从根源禁止页面滚动 */
+}
+
 .canvas-content {
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,.8);
-  display: flex;
-  justify-content: center;
-}
-
-.canvas-content .img-wrap {
-
-}
-
-.canvas-content .img {
-  border-radius: 10rpx;
-  width: 600rpx;
-  margin-top: 50rpx;
-}
-
-.share-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 300rpx;
-  border-radius: 20rpx 20rpx 0 0;
-  background: #ededed;
-  display: flex;
-  justify-content: space-around;
-}
-.share-footer .btn-item {
+  background: #1a1a1a; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40rpx;
-  background-color: #ededed !important;
+  box-sizing: border-box;
+  padding: 40rpx; 
+  justify-content: center;
 }
 
-.share-footer .btn-item .img-wrap {
-  width: 50rpx;
-  height: 50rpx;
-  background: #fff;
-  padding: 30rpx;
-  border-radius: 20rpx;
-}
-
-.share-footer .btn-item .img-wrap .img-icon {
+/* 一体化中央大卡片 */
+.main-card-container {
+  background: #ffffff;
+  border-radius: 24rpx;
   width: 100%;
-  height: 100%;
+  max-width: 620rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  box-shadow: 0 12rpx 40rpx rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease; /* 丝滑过渡 */
 }
 
-.share-footer .btn-item .btn-text {
+/* ── 重点优化：单海报模式下的卡片微调 ── */
+.main-card-container.single-card {
+  padding: 32rpx 32rpx 20rpx 32rpx; /* 单码时稍微加大内边距，显得更精致 */
+}
+
+/* 海报区域基本布局 */
+.poster-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 默认双码状态下的海报高度 */
+.poster-img {
+  width: 100%;
+  height: 47vh; 
+  border-radius: 14rpx;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* ── 重点优化：单海报模式下，自动优雅放大海报高度 ── */
+.main-card-container.single-card .poster-img {
+  height: 60vh; /* 撑满纵向空间，拒绝空洞 */
+}
+
+/* 轻量化链接 */
+.action-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 0 4rpx 0;
   font-size: 24rpx;
-  color: #888888;
-  margin-top: 10rpx;
+  color: #2f86f6; 
+  font-weight: 500;
+}
+.action-link.left-align {
+  justify-content: flex-start;
+  padding: 0;
+}
+.link-icon {
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 6rpx;
+}
+
+/* 下部横向组合区域 */
+.qr-section-inline {
+  margin-top: 16rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx dashed #eef0f4;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.qr-left {
+  width: 130rpx;
+  height: 130rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #eaeaea;
+}
+.qr-img {
+  width: 110rpx;
+  height: 110rpx;
+}
+
+.qr-right {
+  flex: 1;
+  padding-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.qr-title {
+  font-size: 26rpx;
+  color: #333333;
+  font-weight: bold;
+}
+.qr-tip {
+  font-size: 20rpx;
+  color: #999999;
+  margin-top: 2rpx;
+  margin-bottom: 12rpx;
+}
+
+/* 按钮组并排布局 */
+.action-group {
+  display: flex;
+  align-items: center;
+}
+.split-line {
+  margin-left: 24rpx;
+  padding-left: 24rpx;
+  border-left: 2rpx solid #eef0f4; 
+}
+
+/* 高质感微信悬浮分享大按钮 */
+.float-share-btn {
+  margin-top: 40rpx !important;
+  width: 500rpx !important; 
+  height: 88rpx !important;
+  background: #07c160 !important; 
+  color: #ffffff !important;
+  border-radius: 44rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 30rpx !important;
+  font-weight: 500 !important;
+  box-shadow: 0 8rpx 24rpx rgba(7, 193, 96, 0.3);
+  padding: 0 !important;
+}
+
+.float-share-btn:active {
+  opacity: 0.8;
+}
+
+.share-btn-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
 }

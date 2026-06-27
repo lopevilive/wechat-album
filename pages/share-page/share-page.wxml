@@ -1,32 +1,36 @@
-<!--index.wxml-->
-<!-- <web-view src="{{web_src}}"> </web-view> -->
-<wxs module="m1">
-  module.exports.canExport = function (inventoryId, noExport) {
-    if (noExport === '1') return false
-    return !!inventoryId
-  }
-</wxs>
- 
 <view class="canvas-content">
-  <view class="img-wrap">
-    <image class="img" src="{{image}}" mode="widthFix"/>
+  <view class="main-card-container {{!qrcodeUrl ? 'single-card' : ''}}">
+    
+    <view class="poster-section">
+      <image class="poster-img" src="{{image}}" mode="aspectFit"/>
+      <view class="action-link" bind:tap="saveImage" wx:if="{{image}}">
+        <image class="link-icon" src="/assets/download.png"/>
+        <text>保存海报至相册</text>
+      </view>
+    </view>
+
+    <view class="qr-section-inline" wx:if="{{qrcodeUrl}}">
+      <view class="qr-left">
+        <image class="qr-img" src="{{qrcodeUrl}}" mode="aspectFit" show-menu-by-longpress="true"/>
+      </view>
+      <view class="qr-right">
+        <view class="qr-title">专属 H5 链接</view>
+        <view class="qr-tip">长按识别二维码或复制链接查看</view>
+        
+        <view class="action-group">
+          <view class="action-link left-align" bind:tap="saveQrCode">
+            <image class="link-icon" src="/assets/download.png"/>
+            <text>保存码</text>
+          </view>
+          <view class="action-link left-align split-line" bind:tap="copyH5Link">
+            <text>复制链接</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="share-footer">
-    <button class="btn-item" size="mini" open-type="share">
-      <view class="img-wrap"> <image class="img-icon" src="/assets/share.png"/> </view>
-      <view class="btn-text">转发给朋友</view>
-    </button>
-    <button class="btn-item" size="mini" wx:if="{{m1.canExport(inventoryId, noExport)}}" bind:tap="downloadExcel">
-      <view class="img-wrap"> <image class="img-icon" src="/assets/excel.png"/> </view>
-      <view class="btn-text">导出 Excel</view>
-    </button>
-    <button class="btn-item" size="mini" bind:tap="saveImage" disabled="{{!image}}">
-      <view class="img-wrap"> <image class="img-icon" src="/assets/download.png"/> </view>
-      <view class="btn-text">保存到相册</view>
-    </button>
-  </view>
+
+  <button class="float-share-btn" open-type="share">
+    <text>转发给朋友</text>
+  </button>
 </view>
-
-
-
-  <!-- <view>login</view> -->

@@ -8,14 +8,31 @@ Page({
   },
   async onLoad(options) {
     getApp().globalData.webVeiwName = ''
-    let {src_path, scene} = options
-    if (src_path) src_path = decodeURIComponent(src_path)
-    if (!src_path) src_path = '/'
-    if (scene) {
-      src_path = `/view-share?scene=${scene}`
-      // console.log(src_path, 'src')
-      // return
+    let {src_path, scene, q} = options
+    while(true) {
+      if (q) { // 通过扫描普通二维码打开
+        const h5Link = decodeURIComponent(q)
+        let urlInstance = new util.UrlTools(h5Link)
+        let pathName = urlInstance.getPathName()
+        const match = h5Link.match(/\/product-manage\/(\d+)\?toDetial=(\d+)$/)
+        if (match) { // 跳转产品详情
+          const sId = match[1]
+          const pId = match[2]
+          src_path = `/product-manage/${sId}?toDetial=${pId}`
+          break 
+        }
+        if (/\/product-manage\/(\d+)$/.test(pathName)) { // 图册列表
+          src_path = pathName
+          break
+        }
+        src_path = '/'
+        break
+      }
+      if (src_path) src_path = decodeURIComponent(src_path)
+      if (scene) src_path = `/view-share?scene=${scene}`
+      break
     }
+    if (!src_path) src_path = '/'
     this.setData({src_path})
     // this.init(src_path)
   },
