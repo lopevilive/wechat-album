@@ -1,7 +1,7 @@
 <view class="container">
   <view class="loading-box" wx:if="{{isProcessing}}">
     <view class="spinner"></view>
-    <view class="title">正在准备清单</view>
+    <view class="title">{{loadingText}}</view>
     <view class="progress-bar">
       <view class="progress-inner" style="width: {{progress}}%"></view>
     </view>
@@ -10,10 +10,10 @@
 
   <view class="success-box" wx:elif="{{tempFilePath}}">
     <icon type="success" size="80" color="#07c160"></icon>
-    <view class="title">文件已生成</view>
+    <view class="title">{{successText}}</view>
     
     <button class="main-btn" bindtap="handleTapShare" type="primary">
-      保存
+      {{btnText}}
     </button>
 
     <view class="back-link" bindtap="goBack">返回</view>
