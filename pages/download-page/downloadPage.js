@@ -27,7 +27,7 @@ Page({
         fileName: info.fileName || (isVideo ? `视频_${Date.now()}.mp4` : '报价清单.xlsx'),
         loadingText: isVideo ? '正在准备视频' : '正在准备清单',
         successText: isVideo ? '视频已生成' : '文件已生成',
-        btnText: isVideo ? '保存到相册' : '保存'
+        btnText: '保存'
       });
 
       console.log(info.url, 'info.url')
@@ -106,51 +106,71 @@ Page({
 
   },
 
-  // 视频保存到系统相册（含权限申请与失败兜底）
+  // 视频处理：PC 端保存到相册，非 PC 端走文件转发（与 handleTapShare 逻辑一致）
   saveVideo() {
-    const doSave = () => {
-      wx.saveVideoToPhotosAlbum({
-        filePath: this.data.tempFilePath,
-        success: () => {
-          wx.showToast({ title: '已保存到相册', icon: 'success' });
-          setTimeout(() => { this.goBack(); }, 1200);
-        },
-        fail: (err) => {
-          console.error('保存视频失败', err);
-          const msg = (err && err.errMsg) || '';
-          if (msg.includes('auth deny') || msg.includes('auth denied') || msg.includes('authorize:fail')) {
-            // 用户拒绝过相册权限，引导去设置页开启
+    const sysInfo = wx.getSystemInfoSync();
+    const isPC = sysInfo.platform === 'windows' || sysInfo.platform === 'mac';
+
+    if (isPC) {
+      // PC 端：保存到系统相册
+      const doSave = () => {
+        wx.saveVideoToPhotosAlbum({
+          filePath: this.data.tempFilePath,
+          success: () => {
+            wx.showToast({ title: '已保存到相册', icon: 'success' });
+            setTimeout(() => { this.goBack(); }, 1200);
+          },
+          fail: (err) => {
+            console.error('保存视频失败', err);
+            const msg = (err && err.errMsg) || '';
+            if (msg.includes('auth deny') || msg.includes('auth denied') || msg.includes('authorize:fail')) {
+              // 用户拒绝过相册权限，引导去设置页开启
+              wx.showModal({
+                title: '提示',
+                content: '需要允许访问相册权限才能保存视频',
+                confirmText: '去授权',
+                success: (res) => { if (res.confirm) wx.openSetting(); }
+              });
+            } else if (msg.includes('cancel')) {
+              // 用户主动取消，无需提示
+            } else {
+              wx.showModal({ title: '提示', content: '保存失败，请重试', showCancel: false });
+            }
+          }
+        });
+      };
+
+      // 主动校验相册权限，避免首次保存静默失败
+      wx.getSetting({
+        success: (res) => {
+          if (res.authSetting['scope.writePhotosAlbum'] === false) {
             wx.showModal({
               title: '提示',
               content: '需要允许访问相册权限才能保存视频',
               confirmText: '去授权',
-              success: (res) => { if (res.confirm) wx.openSetting(); }
+              success: (r) => { if (r.confirm) wx.openSetting(); }
             });
-          } else if (msg.includes('cancel')) {
-            // 用户主动取消，无需提示
           } else {
-            wx.showModal({ title: '提示', content: '保存失败，请重试', showCancel: false });
+            doSave();
           }
+        },
+        fail: doSave
+      });
+    } else {
+      // 非 PC 端：文件转发（发送给微信好友）
+      wx.shareFileMessage({
+        filePath: this.data.tempFilePath,
+        fileName: this.data.fileName,
+        success: () => {
+          wx.showToast({ title: '已发起分享', icon: 'success' });
+          setTimeout(() => { this.goBack(); }, 1200);
+        },
+        fail: (err) => {
+          // 分享失败或取消，留在当前页让用户可以再次点击
+          console.log('用户取消或转发失败', err);
         }
       });
-    };
-
-    // 主动校验相册权限，避免首次保存静默失败
-    wx.getSetting({
-      success: (res) => {
-        if (res.authSetting['scope.writePhotosAlbum'] === false) {
-          wx.showModal({
-            title: '提示',
-            content: '需要允许访问相册权限才能保存视频',
-            confirmText: '去授权',
-            success: (r) => { if (r.confirm) wx.openSetting(); }
-          });
-        } else {
-          doSave();
-        }
-      },
-      fail: doSave
-    });
+    }
   },
 
   goBack() {
